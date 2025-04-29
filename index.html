@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <link rel="icon" type="image/x-icon" href="LeylixLogoWebseiteRot.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Esat Vurcak– Digitale Visitenkarte</title>
+  <style>
+    
+    body { 
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f5f5;
+      color: #222;
+      text-align: center;
+    }
+    .card {
+    width: fit-content;
+    max-width: 90%;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 12px;
+    background: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    animation: fadeInUp 0.8s ease forwards;
+    opacity: 0; /* Startzustand für Animation */
+    transform: translateY(20px); /* Startzustand: leicht nach unten versetzt */
+  }
+
+.contact-info,
+  .websites {
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* Abstand zwischen den Links */
+    margin-bottom: 10px;
+    flex-wrap: wrap; /* Falls Handy, bricht schön um */
+  }
+
+.card a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 16px;
+  }
+
+  .card a:hover {
+    text-decoration: underline;
+  }
+
+@keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+    .avatar {
+  width: 120px;
+  height: 120px; /* Höhe hinzufügen, gleich wie Breite */
+  border-radius: 50%; /* 50% macht es wirklich rund, egal welche Größe */
+  object-fit: cover; /* schneidet das Bild schön passend zu */
+  margin-bottom: 20px;
+}
+
+.avatar.enlarged {
+    width: 200px;
+    height: 200px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6); /* Schöner weicher Schatten */
+  }
+    
+    h1 { margin: 0; }
+    p.title { color: gray; margin-top: 5px; }
+    .info { margin-top: 20px; font-size: 16px; }
+    .info a { display: block; margin: 8px 0; color: #0077cc; text-decoration: none; }
+    .leyline {
+      margin-top: 40px;
+      font-size: 14px;
+      color: #777;
+    }
+	.btn {
+      background: #6b14b8;
+      color: #fff;
+      padding: 12px 20px;
+      margin-top: 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+   
+	.save-contact-btn {
+    background-color: #2e8b57; /* schönes, sattes Grün */
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    animation: pulse 2s infinite;
+    transition: background-color 0.3s ease;
+  }
+
+  .save-contact-btn:hover {
+    background-color: #218838; /* leicht dunkler beim Hover */
+  }
+  .save-contact-btn:active {
+    transform: scale(0.95); /* Beim Tippen/Klicken leicht kleiner */
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7);
+    }
+    70% {
+      transform: scale(1.05);
+      box-shadow: 0 0 0 10px rgba(40, 167, 69, 0);
+    }
+    100% {
+      transform: scale(1);
+      box-shadow: 0 0 0 0 rgba(40, 167, 69, 0);
+    }
+  }
+  </style>
+</head>
+<body>
+  
+  <div class="card">    
+    <img src="ElionV-Card.jpg?" alt="Esat Vurcak" class="avatar" onclick="toggleAvatarSize(this)" />
+    <h1>Esat Vurcak</h1>
+    <p class="title">Founder & CEO Vuneco GmbH</p>
+<script>
+  function toggleAvatarSize(element) {
+    element.classList.toggle('enlarged');
+  }
+</script>
+ </div>
+    <div class="card">
+  <div class="contact-info">
+    <a href="mailto:info@vuneco.com">📧 info@vuneco.com</a>
+    <a href="tel:+4915151402200">📞 +49 1515 1402200</a>
+  </div>
+  <div class="websites">
+    <a href="#" onclick= "openFrame('https://leylix.com')">🌐 Leylix.com</a>
+    <onclick="https://vuneco.com" target="_blank">🌐 Vuneco.com</a>
+    <onclick="https://vunecoin.com" target="_blank">🌐 VuneCoin.com</a>
+  </div>
+</div>
+
+    <a onclick="https://leylix.com" class="btn" target="_blank">Jetzt Leylix entdecken</a>
+    <a href="EsatVCard.vcf" download class="save-contact-btn">📥 Kontakt speichern</a>
+
+    <div class="leyline">
+      Digital Business – powered by Leylix & Elion
+    </div>
+
+
+
+    <div style="margin: 60px auto; max-width: 800px;">
+  <h2 style="text-align: center;">🎉 Entdecke Leylix in Aktion</h2>
+  <img src="blumenBild.jpg" alt="Blumen Bild" style="width: 100%; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.2); margin-top: 20px;">
+      <div style="margin: 60px auto; max-width: 800px;">
+  <h2 style="text-align: center;">🎉 Entdecke VuneCoin in Aktion</h2>
+  <img src="blumenBild.jpg" alt="Blumen Bild" style="width: 100%; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.2); margin-top: 20px;">
+        <div style="margin: 60px auto; max-width: 800px;">
+  <h2 style="text-align: center;">🎬 Kurzes Video zu Leylix</h2>
+  <video width="100%" controls style="border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.2); margin-top: 20px;">
+    <source src="leylix-demo.mp4" type="video/mp4">
+    Dein Browser unterstützt dieses Videoformat nicht.
+  </video>
+          <div style="margin: 60px auto; max-width: 800px;">
+  <h2 style="text-align: center;">🎬 Esat´s Wort über Politik1</h2>
+  <video width="100%" controls poster="blumenBild.jpg" style="border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.2); margin-top: 20px;">          
+  
+    <source src="leylix-demo.mp4" type="video/mp4">
+    Dein Browser unterstützt dieses Videoformat nicht.
+    
+  </video>
+
+</div>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; margin-bottom: 20px; border-radius: 12px;">
+  <iframe id="youtube-player" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
+    src="" 
+    frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowfullscreen>
+  </iframe>
+</div>
+
+<script>
+  const youtubeURL = "https://www.youtube.com/watch?v=XXYlFuWEuKI&list=RDsVx1mJDeUjY&index=3"; // deine URL
+
+  function getYouTubeVideoID(url) {
+    const urlObj = new URL(url);
+    return urlObj.searchParams.get('v');
+  }
+
+  const videoID = getYouTubeVideoID(youtubeURL);
+
+  if (videoID) {
+    document.getElementById('youtube-player').src = `https://www.youtube.com/embed/${videoID}?rel=0&showinfo=0&modestbranding=1`;
+  }
+</script>
+</body>
+
+</div>
+  </div>
+
+</body>
+</html>
