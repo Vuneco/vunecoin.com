@@ -267,11 +267,11 @@
       }, moveInDelay);
 
       if (i === 0) {
-        setTimeout(() => {
-          block.style.left = `${walletCenterX - blockWidth / 2}px`;
-        }, 500);
-        return;
-      }
+  setTimeout(() => {
+    block.style.left = `${walletCenterX - blockWidth / 2}px`;
+  }, moveInDelay);
+  return;
+}
 
       setTimeout(() => {
         createConnector(blocks[i - 1], blocks[i]);
