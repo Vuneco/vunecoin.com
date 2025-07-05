@@ -270,22 +270,20 @@
   setTimeout(() => {
     block.style.left = `${walletCenterX - blockWidth / 2}px`;
   }, 500);
-  return;
+} else {
+  setTimeout(() => {
+    createConnector(blocks[i - 1], blocks[i]);
+    dropCoin();
+
+    setTimeout(() => {
+      for (let j = 0; j <= i; j++) {
+        const newLeft = walletCenterX - (i - j + 0.5) * blockSpacing;
+        blocks[j].style.left = `${newLeft}px`;
+      }
+      updateAllConnectors();
+    }, 1000);
+  }, connectDelay);
 }
-
-      setTimeout(() => {
-        createConnector(blocks[i - 1], blocks[i]);
-        dropCoin();
-
-        setTimeout(() => {
-          for (let j = 0; j <= i; j++) {
-            const newLeft = walletCenterX - (i - j + 0.5) * blockSpacing;
-            blocks[j].style.left = `${newLeft}px`;
-          }
-          updateAllConnectors();
-        }, 1000);
-      }, connectDelay);
-    }
 
     function startChain() {
       addBlock(index);
