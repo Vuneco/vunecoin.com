@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="VuneCoin – Die Blockchain-Zukunft beginnt hier. Erlebe eine neue Ära digitaler Währungen mit Sicherheit, Geschwindigkeit und Vision." />
+  <meta property="og:title" content="VuneCoin – Die Blockchain der nächsten Generation" />
+  <meta property="og:description" content="Erkunde VuneCoin, wo Innovation auf Vertrauen trifft. Deine nächste Chance in der Krypto-Welt beginnt hier." />
+  <meta property="og:image" content="https://seo.vunecoin.com/assets/vunecoin-og.jpg" />
+  <meta property="og:url" content="https://seo.vunecoin.com" />
+  <link rel="canonical" href="https://seo.vunecoin.com">
+  <link rel="icon" type="image/png" href="/assets/vunecoin-icon.png">
+  <title>VuneCoin – Die Zukunft der Blockchain</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #000;
+      color: #fff;
+      overflow-x: hidden;
+    }
+    header {
+      background: linear-gradient(135deg, #0ff, #08f);
+      text-align: center;
+      padding: 4rem 1rem;
+    }
+    header h1 {
+      font-size: 3rem;
+      margin: 0;
+      animation: glow 2s infinite alternate;
+    }
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #0ff; }
+      to { text-shadow: 0 0 20px #0ff; }
+    }
+
+    .animation-container {
+      position: relative;
+      height: 320px;
+      margin: 4rem auto;
+      overflow: hidden;
+    }
+
+    .wallet {
+      width: 160px;
+      height: 100px;
+      background: #222;
+      border: 2px solid #0ff;
+      border-radius: 20px;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      padding-bottom: 0.5rem;
+      color: #0ff;
+      font-weight: bold;
+      z-index: 1;
+    }
+
+    .wallet img {
+      width: 40px;
+      height: 40px;
+    }
+
+    .block {
+      width: 100px;
+      height: 100px;
+      background: #111;
+      border: 2px solid #0ff;
+      border-radius: 12px;
+      position: absolute;
+      top: 80px;
+      transition: left 1s ease-in-out;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .block img {
+      width: 32px;
+      height: 32px;
+      margin-bottom: 4px;
+    }
+
+    .block span {
+      color: #0ff;
+      font-size: 0.9rem;
+      font-weight: bold;
+    }
+
+    .connector {
+      height: 4px;
+      background: #0ff;
+      position: absolute;
+      top: 130px;
+      transition: all 1s ease-in-out;
+      z-index: 0;
+    }
+
+    .coin {
+      width: 40px;
+      height: 40px;
+      background: radial-gradient(circle, #0ff, #088);
+      border-radius: 50%;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: dropCoin 1s ease-in forwards;
+      z-index: 10;
+    }
+
+    .coin img {
+      width: 24px;
+      height: 24px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    @keyframes dropCoin {
+      0% { top: 80px; opacity: 0; }
+      50% { top: 150px; opacity: 1; }
+      100% { top: 210px; opacity: 1; }
+    }
+
+    .intro-text {
+      text-align: center;
+      max-width: 800px;
+      margin: 2rem auto;
+      font-size: 1.3rem;
+      line-height: 1.8;
+    }
+
+    .cta {
+      text-align: center;
+      margin: 3rem auto;
+    }
+    .cta a {
+      background: #0ff;
+      color: #000;
+      padding: 1rem 2rem;
+      text-decoration: none;
+      border-radius: 1rem;
+      font-weight: bold;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+    .cta a:hover {
+      background: #00ccff;
+    }
+
+    footer {
+      text-align: center;
+      padding: 3rem 1rem;
+      background: #111;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>VuneCoin – Die Zukunft der Blockchain beginnt hier</h1>
+  </header>
+
+  <section class="intro-text">
+    <p>Willkommen bei <strong>VuneCoin</strong> – einer neuen Generation von Kryptowährungen, die auf Geschwindigkeit, Vertrauen und Transparenz setzt. Unsere Blockchain ist nicht nur Technologie, sie ist Bewegung. Jeder Block sichert nicht nur Daten, sondern auch dein Vertrauen.</p>
+  </section>
+
+  <div class="animation-container" id="animationContainer">
+    <div class="wallet">
+      <img src="/assets/vunecoin-icon.png" alt="VuneCoin Logo" />
+      VuneCoin
+    </div>
+  </div>
+
+  <div class="cta">
+    <a href="https://vunecoin.com" target="_blank">Jetzt VuneCoin entdecken</a>
+  </div>
+
+  <footer>
+    &copy; 2025 VuneCoin. A proud creation by Vuneco GmbH.
+  </footer>
+
+  <script>
+    const container = document.getElementById("animationContainer");
+    const wallet = container.querySelector(".wallet");
+    const walletCenterX = wallet.offsetLeft + wallet.offsetWidth / 2;
+    const blockWidth = 100;
+    const blockSpacing = 120;
+    const blocks = [];
+    const connectors = [];
+
+    function createBlock(x) {
+      const block = document.createElement("div");
+      block.className = "block";
+      block.style.left = `${x}px`;
+
+      const logo = document.createElement("img");
+      logo.src = "/assets/vunecoin-icon.png";
+      logo.alt = "VuneCoin Logo";
+
+      const label = document.createElement("span");
+      label.textContent = "Block";
+
+      block.appendChild(logo);
+      block.appendChild(label);
+
+      container.appendChild(block);
+      return block;
+    }
+
+    function createConnector(from, to) {
+      const connector = document.createElement("div");
+      connector.className = "connector";
+      const fromX = parseFloat(from.style.left);
+      const toX = parseFloat(to.style.left);
+      connector.style.left = `${fromX + blockWidth}px`;
+      connector.style.width = `${toX - (fromX + blockWidth)}px`;
+      container.appendChild(connector);
+      connectors.push({connector, from, to});
+    }
+
+    function updateConnectors() {
+      connectors.forEach(({connector, from, to}) => {
+        const fromX = parseFloat(from.style.left);
+        const toX = parseFloat(to.style.left);
+        connector.style.left = `${fromX + blockWidth}px`;
+        connector.style.width = `${toX - (fromX + blockWidth)}px`;
+      });
+    }
+
+    function dropCoin() {
+      const coin = document.createElement("div");
+      coin.className = "coin";
+      const logo = document.createElement("img");
+      logo.src = "/assets/vunecoin-icon.png";
+      logo.alt = "VuneCoin Coin";
+      coin.appendChild(logo);
+      container.appendChild(coin);
+    }
+
+    function addBlock(index) {
+      const block = createBlock(window.innerWidth + index * blockSpacing);
+      blocks.push(block);
+
+      const moveInDelay = 500 + index * 4000;
+      const connectDelay = moveInDelay + 2000;
+      const shiftDelay = connectDelay + 1000;
+
+      setTimeout(() => {
+        block.style.left = `${walletCenterX + blockSpacing - blockWidth / 2}px`;
+      }, moveInDelay);
+
+      if (index === 0) {
+        setTimeout(() => {
+          block.style.left = `${walletCenterX - blockWidth / 2}px`;
+        }, 500);
+        return;
+      }
+
+      setTimeout(() => {
+        createConnector(blocks[index - 1], blocks[index]);
+        dropCoin();
+
+        setTimeout(() => {
+          for (let j = 0; j <= index; j++) {
+            const newLeft = walletCenterX - (index - j + 0.5) * blockSpacing;
+            blocks[j].style.left = `${newLeft}px`;
+          }
+          updateConnectors();
+        }, 1000);
+      }, connectDelay);
+    }
+
+    for (let i = 0; i < 20; i++) {
+      addBlock(i);
+    }
+  </script>
+</body>
+</html>
+
+
