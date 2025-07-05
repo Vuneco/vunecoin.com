@@ -292,7 +292,10 @@
       setTimeout(startChain, 2000);
     }
 
-    startChain();
+    window.onload = () => {
+  startChain();
+};
+
   </script>
 </body>
 </html>
