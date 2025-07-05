@@ -201,6 +201,13 @@
       return rect.left + rect.width / 2;
     }
 
+    function startChain() {
+      addBlock(index);
+      index++;
+      localStorage.setItem("blockIndex", index);
+      setTimeout(startChain, 2000);
+    }
+
     function createBlock(x) {
       const block = document.createElement("div");
       block.className = "block";
@@ -284,13 +291,6 @@
     }, 1000);
   }, connectDelay);
 }
-
-    function startChain() {
-      addBlock(index);
-      index++;
-      localStorage.setItem("blockIndex", index);
-      setTimeout(startChain, 2000);
-    }
 
     window.onload = () => {
   startChain();
