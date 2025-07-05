@@ -258,7 +258,7 @@
       const block = createBlock(window.innerWidth + i * blockSpacing);
       blocks.push(block);
 
-      const moveInDelay = 500 + i * 4000;
+      const moveInDelay = 500 + i * 2000;
       const connectDelay = moveInDelay + 2000;
       const shiftDelay = connectDelay + 1000;
 
@@ -291,7 +291,7 @@
       addBlock(index);
       index++;
       localStorage.setItem("blockIndex", index);
-      setTimeout(startChain, 4000);
+      setTimeout(startChain, 2000);
     }
 
     startChain();
