@@ -191,11 +191,15 @@
   <script>
     const container = document.getElementById("animationContainer");
     const wallet = container.querySelector(".wallet");
-    const walletCenterX = wallet.offsetLeft + wallet.offsetWidth / 2;
     const blockWidth = 100;
     const blockSpacing = 120;
     const blocks = [];
     const connectors = [];
+
+    function getWalletCenterX() {
+      const rect = wallet.getBoundingClientRect();
+      return rect.left + rect.width / 2;
+    }
 
     function createBlock(x) {
       const block = document.createElement("div");
@@ -219,20 +223,21 @@
     function createConnector(from, to) {
       const connector = document.createElement("div");
       connector.className = "connector";
+      container.appendChild(connector);
+      connectors.push({connector, from, to});
+      updateConnector(connector, from, to);
+    }
+
+    function updateConnector(connector, from, to) {
       const fromX = parseFloat(from.style.left);
       const toX = parseFloat(to.style.left);
       connector.style.left = `${fromX + blockWidth}px`;
       connector.style.width = `${toX - (fromX + blockWidth)}px`;
-      container.appendChild(connector);
-      connectors.push({connector, from, to});
     }
 
-    function updateConnectors() {
+    function updateAllConnectors() {
       connectors.forEach(({connector, from, to}) => {
-        const fromX = parseFloat(from.style.left);
-        const toX = parseFloat(to.style.left);
-        connector.style.left = `${fromX + blockWidth}px`;
-        connector.style.width = `${toX - (fromX + blockWidth)}px`;
+        updateConnector(connector, from, to);
       });
     }
 
@@ -246,11 +251,14 @@
       container.appendChild(coin);
     }
 
-    function addBlock(index) {
-      const block = createBlock(window.innerWidth + index * blockSpacing);
+    let index = parseInt(localStorage.getItem("blockIndex") || "0");
+
+    function addBlock(i) {
+      const walletCenterX = getWalletCenterX();
+      const block = createBlock(window.innerWidth + i * blockSpacing);
       blocks.push(block);
 
-      const moveInDelay = 500 + index * 4000;
+      const moveInDelay = 500 + i * 4000;
       const connectDelay = moveInDelay + 2000;
       const shiftDelay = connectDelay + 1000;
 
@@ -258,7 +266,7 @@
         block.style.left = `${walletCenterX + blockSpacing - blockWidth / 2}px`;
       }, moveInDelay);
 
-      if (index === 0) {
+      if (i === 0) {
         setTimeout(() => {
           block.style.left = `${walletCenterX - blockWidth / 2}px`;
         }, 500);
@@ -266,24 +274,27 @@
       }
 
       setTimeout(() => {
-        createConnector(blocks[index - 1], blocks[index]);
+        createConnector(blocks[i - 1], blocks[i]);
         dropCoin();
 
         setTimeout(() => {
-          for (let j = 0; j <= index; j++) {
-            const newLeft = walletCenterX - (index - j + 0.5) * blockSpacing;
+          for (let j = 0; j <= i; j++) {
+            const newLeft = walletCenterX - (i - j + 0.5) * blockSpacing;
             blocks[j].style.left = `${newLeft}px`;
           }
-          updateConnectors();
+          updateAllConnectors();
         }, 1000);
       }, connectDelay);
     }
 
-    for (let i = 0; i < 20; i++) {
-      addBlock(i);
+    function startChain() {
+      addBlock(index);
+      index++;
+      localStorage.setItem("blockIndex", index);
+      setTimeout(startChain, 4000);
     }
+
+    startChain();
   </script>
 </body>
 </html>
-
-
