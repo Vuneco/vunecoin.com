@@ -255,21 +255,23 @@
 
     function addBlock(i) {
   const walletCenterX = getWalletCenterX();
-  const block = createBlock(window.innerWidth + i * blockSpacing);
+
+  // 🔁 Unterschied: Erster Block direkt korrekt platzieren
+  const startX = i === 0
+    ? walletCenterX - blockWidth / 2
+    : window.innerWidth + i * blockSpacing;
+
+  const block = createBlock(startX);
   blocks.push(block);
 
   const moveInDelay = 500 + i * 2000;
   const connectDelay = moveInDelay + 2000;
 
-  setTimeout(() => {
-    block.style.left = `${walletCenterX + blockSpacing - blockWidth / 2}px`;
-  }, moveInDelay);
-
-  if (i === 0) {
+  if (i !== 0) {
     setTimeout(() => {
-      block.style.left = `${walletCenterX - blockWidth / 2}px`;
-    }, 500);
-  } else {
+      block.style.left = `${walletCenterX + blockSpacing - blockWidth / 2}px`;
+    }, moveInDelay);
+
     setTimeout(() => {
       createConnector(blocks[i - 1], blocks[i]);
       dropCoin();
