@@ -74,7 +74,7 @@
       border-radius: 12px;
       position: absolute;
       top: 80px;
-      transition: left 1s ease-in-out;
+      transition: left 1s ease-in-out; /* Smooth transition for left property */
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -98,7 +98,7 @@
       background: #0ff;
       position: absolute;
       top: 130px;
-      transition: all 1s ease-in-out;
+      transition: all 1s ease-in-out; /* Smooth transition for position and width */
       z-index: 0;
     }
 
@@ -189,113 +189,196 @@
   </footer>
 
   <script>
-    const container = document.getElementById("animationContainer");
-    const wallet = container.querySelector(".wallet");
-    const blockWidth = 100;
-    const blockSpacing = 120;
-    const blocks = [];
-    const connectors = [];
+    console.log("=== VuneCoin Animation Script Loaded ==="); //
 
+    const container = document.getElementById("animationContainer"); //
+    const wallet = container.querySelector(".wallet"); //
+    const blockWidth = 100; //
+    const blockSpacing = 120; //
+    const blocks = []; //
+    const connectors = []; //
+
+    // Tracks the current block index for the animation
+    let index = parseInt(localStorage.getItem("blockIndex") || "0"); //
+    console.log("Initial block index from localStorage:", index); //
+
+    // Helper function to get the center X coordinate of the wallet relative to the animation container
     function getWalletCenterX() {
-      const rect = wallet.getBoundingClientRect();
-      return rect.left + rect.width / 2;
+      if (!wallet || !container) { //
+        console.error("Wallet or container element not found for getWalletCenterX!"); //
+        return 0; // Return a default value to prevent further errors //
+      }
+      const rect = wallet.getBoundingClientRect(); //
+      const containerRect = container.getBoundingClientRect(); //
+      const centerX = (rect.left + rect.width / 2) - containerRect.left; //
+      console.log("Wallet Center X (relative to container):", centerX); //
+      return centerX; //
     }
 
+    // Main function to start and continue the chain animation
     function startChain() {
-      addBlock(index);
-      index++;
-      localStorage.setItem("blockIndex", index);
-      setTimeout(startChain, 2000);
+      console.log("startChain() called. Current index:", index); //
+      addBlock(index); //
+      index++; //
+      localStorage.setItem("blockIndex", index); //
+      // Schedule the next block creation after 2 seconds
+      setTimeout(startChain, 2000); //
+      console.log("Next startChain scheduled in 2000ms."); //
     }
 
-    function createBlock(x) {
-      const block = document.createElement("div");
-      block.className = "block";
-      block.style.left = `${x}px`;
+    // Creates a new block element. Its initial position will be set in addBlock.
+    function createBlock() { //
+      console.log("createBlock() called."); //
+      const block = document.createElement("div"); //
+      block.className = "block"; //
 
-      const logo = document.createElement("img");
-      logo.src = "assets/VuneCoinLogoTradeMark--PNG.png";
-      logo.alt = "VuneCoin Logo";
+      const logo = document.createElement("img"); //
+      logo.src = "assets/VuneCoinLogoTradeMark--PNG.png"; //
+      logo.alt = "VuneCoin Logo"; //
 
-      const label = document.createElement("span");
-      label.textContent = "Block";
+      const label = document.createElement("span"); //
+      label.textContent = "Block"; //
 
-      block.appendChild(logo);
-      block.appendChild(label);
+      block.appendChild(logo); //
+      block.appendChild(label); //
 
-      container.appendChild(block);
-      return block;
+      container.appendChild(block); //
+      console.log("Block element created and appended to container."); //
+      return block; //
     }
 
-    function createConnector(from, to) {
-      const connector = document.createElement("div");
-      connector.className = "connector";
-      container.appendChild(connector);
-      connectors.push({connector, from, to});
-      updateConnector(connector, from, to);
+    // Creates a connector element between two blocks
+    function createConnector(from, to) { //
+      console.log("createConnector() called."); //
+      const connector = document.createElement("div"); //
+      connector.className = "connector"; //
+      container.appendChild(connector); //
+      connectors.push({connector, from, to}); //
+      updateConnector(connector, from, to); //
+      console.log("Connector created."); //
     }
 
-    function updateConnector(connector, from, to) {
-      const fromX = parseFloat(from.style.left);
-      const toX = parseFloat(to.style.left);
-      connector.style.left = `${fromX + blockWidth}px`;
-      connector.style.width = `${toX - (fromX + blockWidth)}px`;
+    // Updates the position and width of a connector based on its connected blocks
+    function updateConnector(connector, from, to) { //
+      const fromX = parseFloat(from.style.left); //
+      const toX = parseFloat(to.style.left); //
+      connector.style.left = `${fromX + blockWidth}px`; //
+      connector.style.width = `${toX - (fromX + blockWidth)}px`; //
+      console.log("Connector updated - fromX:", fromX, "toX:", toX, "width:", connector.style.width); //
     }
 
-    function updateAllConnectors() {
-      connectors.forEach(({connector, from, to}) => {
-        updateConnector(connector, from, to);
+    // Updates all existing connectors (useful when blocks shift)
+    function updateAllConnectors() { //
+      console.log("updateAllConnectors() called."); //
+      connectors.forEach(({connector, from, to}) => { //
+        updateConnector(connector, from, to); //
       });
     }
 
-    function dropCoin() {
-      const coin = document.createElement("div");
-      coin.className = "coin";
-      const logo = document.createElement("img");
-      logo.src = "assets/VuneCoinLogoTradeMark--PNG.png";
-      logo.alt = "VuneCoin Coin";
-      coin.appendChild(logo);
-      container.appendChild(coin);
+    // Animates a coin dropping into the wallet
+    function dropCoin() { //
+      console.log("dropCoin() called."); //
+      const coin = document.createElement("div"); //
+      coin.className = "coin"; //
+      const logo = document.createElement("img"); //
+      logo.src = "assets/VuneCoinLogoTradeMark--PNG.png"; //
+      logo.alt = "VuneCoin Coin"; //
+      coin.appendChild(logo); //
+      container.appendChild(coin); //
+
+      // Remove the coin element after its animation finishes
+      coin.addEventListener('animationend', () => { //
+        coin.remove(); //
+        console.log("Coin animation ended and coin removed."); //
+      });
     }
 
-    let index = parseInt(localStorage.getItem("blockIndex") || "0");
+    // Main function to add and animate a single block in the chain
+    function addBlock(i) { //
+      console.log("addBlock() called for index:", i); //
+      const walletCenterX = getWalletCenterX(); //
+      const targetActiveBlockLeft = walletCenterX - blockWidth / 2; //
+      console.log("Target active block left (centered):", targetActiveBlockLeft); //
 
-    function addBlock(i) {
-      const walletCenterX = getWalletCenterX();
-      const block = createBlock(window.innerWidth + i * blockSpacing);
-      blocks.push(block);
+      const block = createBlock(); //
+      blocks.push(block); //
 
-      // Special handling for the first block (index 0)
-      if (i === 0) {
-        setTimeout(() => {
-          block.style.left = `${walletCenterX - blockWidth / 2}px`; // Center directly over wallet
-        }, 500); // Small delay to allow element to render
-      } else {
-        const moveInDelay = 500 + i * 2000; // Original delay for subsequent blocks
-        const connectDelay = moveInDelay + 2000;
+      if (i === 0) { //
+        // --- Animation for the First Block ---
+        console.log("Adding first block (index 0)."); //
+        // 1. Set initial off-screen position.
+        block.style.left = `${container.offsetWidth}px`; //
+        console.log("Block 0 initial position (off-screen):", block.style.left); //
 
-        setTimeout(() => {
-          block.style.left = `${walletCenterX + blockSpacing - blockWidth / 2}px`;
-        }, moveInDelay);
+        // 2. Force a reflow to ensure the browser registers the initial position.
+        block.offsetWidth; // Do not remove this line! //
 
-        setTimeout(() => {
-          createConnector(blocks[i - 1], blocks[i]);
-          dropCoin();
+        // 3. Animate to the centered position using requestAnimationFrame
+        requestAnimationFrame(() => { //
+          block.style.left = `${targetActiveBlockLeft}px`; //
+          console.log("Block 0 animating to target position:", block.style.left); //
+        });
 
-          setTimeout(() => {
-            for (let j = 0; j <= i; j++) {
-              const newLeft = walletCenterX - (i - j + 0.5) * blockSpacing;
-              blocks[j].style.left = `${newLeft}px`;
-            }
-            updateAllConnectors();
-          }, 1000);
-        }, connectDelay);
+      } else { //
+        // --- Animation for Subsequent Blocks (i > 0) ---
+        console.log("Adding subsequent block (index > 0). Current index:", i); //
+
+        // 1. Set initial off-screen position for the new block
+        block.style.left = `${container.offsetWidth}px`; //
+        console.log("Block", i, "initial position (off-screen):", block.style.left); //
+
+        // 2. Force a reflow for this block too
+        block.offsetWidth; //
+
+        // Step 1: Animate the new block entering from the right
+        setTimeout(() => { //
+          const lastBlockLeft = parseFloat(blocks[i-1].style.left); //
+          block.style.left = `${lastBlockLeft + blockWidth + blockSpacing}px`; //
+          console.log("Block", i, "moving into pre-shift position:", block.style.left); //
+        }, 100); // Small delay to allow initial placement and transition to begin //
+
+        // Step 2: Create connection and drop coin (after the new block has "arrived" at its pre-shift position)
+        setTimeout(() => { //
+          console.log("Block", i, ": Connecting and dropping coin."); //
+          // Ensure blocks[i-1] is defined before creating connector
+          if (blocks[i-1]) { //
+            createConnector(blocks[i - 1], blocks[i]); //
+          } else {
+            console.error("Previous block (blocks[i-1]) is undefined when trying to create connector for block", i);
+          }
+          dropCoin(); //
+        }, 1000); // 1 second after addBlock is called for this block, gives time for block to arrive //
+
+        // Step 3: Shift all blocks to the left (after connection and coin drop)
+        setTimeout(() => { //
+          console.log("Block", i, ": Shifting all blocks."); //
+          // Calculate how much to shift to make blocks[i] (the newest block) centered
+          const currentNewBlockLeft = parseFloat(blocks[i].style.left); //
+          const shiftAmount = currentNewBlockLeft - targetActiveBlockLeft; //
+          console.log("Shift amount for blocks:", shiftAmount); //
+
+          for (let j = 0; j <= i; j++) { //
+            const currentLeft = parseFloat(blocks[j].style.left); //
+            blocks[j].style.left = `${currentLeft - shiftAmount}px`; //
+            console.log(`Block ${j} new left position:`, blocks[j].style.left); //
+          }
+          updateAllConnectors(); //
+        }, 2000); // 2 seconds after addBlock is called for this block (total delay) //
       }
     }
-    
-    window.onload = () => {
-  startChain();
-};
+
+    // Start the blockchain animation when the entire page is loaded.
+    // This ensures all elements are available and avoids re-triggering.
+    window.onload = () => { //
+      console.log("window.onload event fired."); //
+      // Initial check for container and wallet existence
+      if (!container || !wallet) { //
+          console.error("Critical: 'animationContainer' or 'wallet' element not found in DOM!"); //
+          console.error("Please ensure your HTML structure is correct."); //
+          return; // Stop script execution if essential elements are missing //
+      }
+      startChain(); //
+    };
   </script>
-  </body>
+</body>
 </html>
