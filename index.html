@@ -191,8 +191,10 @@
   <script>
     console.log("=== VuneCoin Animation Script Loaded ===");
 
-    const container = document.getElementById("animationContainer");
-    const wallet = container.querySelector(".wallet");
+    // Diese Variablen müssen NACHDEM das DOM geladen wurde initialisiert werden.
+    // Daher sind sie hier global deklariert, aber ihre Zuweisung findet in window.onload statt.
+    let container;
+    let wallet;
     const blockWidth = 100;
     const blockSpacing = 120;
     const blocks = [];
@@ -205,7 +207,7 @@
     // Helper function to get the center X coordinate of the wallet relative to the animation container
     function getWalletCenterX() {
       if (!wallet || !container) {
-        console.error("Wallet or container element not found for getWalletCenterX!");
+        console.error("Wallet or container element not found for getWalletCenterX! This should not happen if called after window.onload.");
         return 0; // Return a default value to prevent further errors
       }
       const rect = wallet.getBoundingClientRect();
@@ -227,11 +229,10 @@
     }
 
     // Creates a new block element. Its initial position will be set in addBlock.
-    function createBlock() { // Removed x parameter here as initial position is set in addBlock
+    function createBlock() {
       console.log("createBlock() called.");
       const block = document.createElement("div");
       block.className = "block";
-      // Initial left position is NOT set here to ensure CSS transition works from a defined start point later
 
       const logo = document.createElement("img");
       logo.src = "assets/VuneCoinLogoTradeMark--PNG.png"; // Corrected path
@@ -261,6 +262,11 @@
 
     // Updates the position and width of a connector based on its connected blocks
     function updateConnector(connector, from, to) {
+      // Stellen Sie sicher, dass 'from' und 'to' tatsächlich DOM-Elemente sind
+      if (!from || !to || !from.style || !to.style) {
+          console.error("Cannot update connector: 'from' or 'to' block is missing or invalid.", {from, to});
+          return;
+      }
       const fromX = parseFloat(from.style.left);
       const toX = parseFloat(to.style.left);
       connector.style.left = `${fromX + blockWidth}px`;
@@ -312,6 +318,7 @@
         console.log("Block 0 initial position (off-screen):", block.style.left);
 
         // 2. Force a reflow to ensure the browser registers the initial position.
+        // This is crucial for the CSS transition to work from the initial 'left' value.
         block.offsetWidth; // Do not remove this line!
 
         // 3. Animate to the centered position using requestAnimationFrame
@@ -373,13 +380,21 @@
     // Start the blockchain animation when the entire page is loaded.
     // This ensures all elements are available and avoids re-triggering.
     window.addEventListener('load', () => { // Using addEventListener is generally better than assigning to .onload directly
-      console.log("window.load event fired. Initializing startChain().");
-      // Initial check for container and wallet existence
-      if (!container || !wallet) {
-          console.error("Critical: 'animationContainer' or 'wallet' element not found in DOM!");
+      console.log("window.load event fired. Initializing DOM elements and startChain().");
+      // Initial check for container and wallet existence, and assign them
+      container = document.getElementById("animationContainer");
+      if (!container) {
+          console.error("Critical: 'animationContainer' element not found in DOM!");
           console.error("Please ensure your HTML structure is correct.");
           return; // Stop script execution if essential elements are missing
       }
+      wallet = container.querySelector(".wallet");
+      if (!wallet) {
+          console.error("Critical: 'wallet' element not found inside 'animationContainer'!");
+          console.error("Please ensure your HTML structure is correct.");
+          return; // Stop script execution if essential elements are missing
+      }
+
       startChain();
     });
   </script>
