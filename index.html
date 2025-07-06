@@ -260,33 +260,33 @@
     const shiftDelay = connectDelay + 1000;
 
     if (index === 0) {
-      setTimeout(() => {
-        block.style.left = `${wallet.offsetLeft + wallet.offsetWidth / 2 - blockWidth / 2}px`;
-        
-      }, 500);
-    } else {
-      setTimeout(() => {
-        if (index === 0) {
-       block.style.left = `${walletX - blockWidth / 2}px`;
-      }, moveInDelay);
+  setTimeout(() => {
+    block.style.left = `${wallet.offsetLeft + wallet.offsetWidth / 2 - blockWidth / 2}px`;
+  }, moveInDelay);
+} else {
+  setTimeout(() => {
+    block.style.left = `${wallet.offsetLeft + wallet.offsetWidth / 2 + blockSpacing - blockWidth / 2}px`;
+  }, moveInDelay);
 
-      setTimeout(() => {
-  for (let j = 0; j <= index; j++) {
-    const newLeft = walletX - (index - j + 0.5) * blockSpacing;
-    blocks[j].style.left = `${newLeft}px`;
-  }
-  updateConnectors();
-  addBlock(++blockIndex); // nächste Runde
-}, 1000);
-      }, connectDelay);
-    }
-  }
+  setTimeout(() => {
+    createConnector(blocks[index - 1], blocks[index]);
+    dropCoin();
+
+    setTimeout(() => {
+      for (let j = 0; j <= index; j++) {
+        const newLeft = wallet.offsetLeft + wallet.offsetWidth / 2 - (index - j + 0.5) * blockSpacing;
+        blocks[j].style.left = `${newLeft}px`;
+      }
+      updateConnectors();
+      addBlock(index + 1); // nächste Runde
+    }, 1000);
+  }, connectDelay);
+}
+
 
   window.onload = () => {
-    for (let i = 0; i < 20; i++) {
-      addBlock(i);
-    }
-  }
+  addBlock(0);
+};
   };
 </script>
 </body>
