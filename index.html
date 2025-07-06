@@ -265,33 +265,33 @@
       const block = createBlock(window.innerWidth + i * blockSpacing);
       blocks.push(block);
 
-      const moveInDelay = 500 + i * 2000;
-      const connectDelay = moveInDelay + 2000;
-      const shiftDelay = connectDelay + 1000;
+      // Special handling for the first block (index 0)
+      if (i === 0) {
+        setTimeout(() => {
+          block.style.left = `${walletCenterX - blockWidth / 2}px`; // Center directly over wallet
+        }, 500); // Small delay to allow element to render
+      } else {
+        const moveInDelay = 500 + i * 2000; // Original delay for subsequent blocks
+        const connectDelay = moveInDelay + 2000;
 
-      setTimeout(() => {
-        block.style.left = `${walletCenterX + blockSpacing - blockWidth / 2}px`;
-      }, moveInDelay);
+        setTimeout(() => {
+          block.style.left = `${walletCenterX + blockSpacing - blockWidth / 2}px`;
+        }, moveInDelay);
 
-     if (i === 0) {
-  setTimeout(() => {
-    block.style.left = `${walletCenterX - blockWidth / 2}px`;
-  }, 500);
-} else {
-  setTimeout(() => {
-    createConnector(blocks[i - 1], blocks[i]);
-    dropCoin();
+        setTimeout(() => {
+          createConnector(blocks[i - 1], blocks[i]);
+          dropCoin();
 
-    setTimeout(() => {
-      for (let j = 0; j <= i; j++) {
-        const newLeft = walletCenterX - (i - j + 0.5) * blockSpacing;
-        blocks[j].style.left = `${newLeft}px`;
+          setTimeout(() => {
+            for (let j = 0; j <= i; j++) {
+              const newLeft = walletCenterX - (i - j + 0.5) * blockSpacing;
+              blocks[j].style.left = `${newLeft}px`;
+            }
+            updateAllConnectors();
+          }, 1000);
+        }, connectDelay);
       }
-      updateAllConnectors();
-    }, 1000);
-  }, connectDelay);
-}
-
+    }
     window.onload = () => {
   startChain();
 };
