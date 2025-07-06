@@ -261,7 +261,8 @@
 
     if (index === 0) {
       setTimeout(() => {
-        block.style.left = `${walletCenterX - blockWidth / 2}px`;
+        block.style.left = `${wallet.offsetLeft + wallet.offsetWidth / 2 - blockWidth / 2}px`;
+        
       }, 500);
     } else {
       setTimeout(() => {
