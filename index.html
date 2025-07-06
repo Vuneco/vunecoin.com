@@ -189,107 +189,106 @@
   </footer>
 
   <script>
-    const container = document.getElementById("animationContainer");
-    const wallet = container.querySelector(".wallet");
-    const walletCenterX = wallet.offsetLeft + wallet.offsetWidth / 2;
-    const blockWidth = 100;
-    const blockSpacing = 120;
-    const blocks = [];
-    const connectors = [];
+  const container = document.getElementById("animationContainer");
+  const wallet = container.querySelector(".wallet");
+  const walletCenterX = wallet.offsetLeft + wallet.offsetWidth / 2;
+  const blockWidth = 100;
+  const blockSpacing = 120;
+  const blocks = [];
+  const connectors = [];
 
-function getWalletCenterX() {
-      const rect = wallet.getBoundingClientRect();
-      return rect.left + rect.width / 2;
-    }
+  function getWalletCenterX() {
+    const rect = wallet.getBoundingClientRect();
+    return rect.left + rect.width / 2;
+  }
 
-    function createBlock(x) {
-      const block = document.createElement("div");
-      block.className = "block";
-      block.style.left = `${x}px`;
+  function createBlock(x) {
+    const block = document.createElement("div");
+    block.className = "block";
+    block.style.left = `${x}px`;
 
-      const logo = document.createElement("img");
-      logo.src = "/assets/VuneCoinLogoTradeMark--PNG.png";
-      logo.alt = "VuneCoin Logo";
+    const logo = document.createElement("img");
+    logo.src = "/assets/VuneCoinLogoTradeMark--PNG.png";
+    logo.alt = "VuneCoin Logo";
 
-      const label = document.createElement("span");
-      label.textContent = "Block";
+    const label = document.createElement("span");
+    label.textContent = "Block";
 
-      block.appendChild(logo);
-      block.appendChild(label);
+    block.appendChild(logo);
+    block.appendChild(label);
 
-      container.appendChild(block);
-      return block;
-    }
+    container.appendChild(block);
+    return block;
+  }
 
-    function createConnector(from, to) {
-      const connector = document.createElement("div");
-      connector.className = "connector";
+  function createConnector(from, to) {
+    const connector = document.createElement("div");
+    connector.className = "connector";
+    const fromX = parseFloat(from.style.left);
+    const toX = parseFloat(to.style.left);
+    connector.style.left = `${fromX + blockWidth}px`;
+    connector.style.width = `${toX - (fromX + blockWidth)}px`;
+    container.appendChild(connector);
+    connectors.push({connector, from, to});
+  }
+
+  function updateConnectors() {
+    connectors.forEach(({connector, from, to}) => {
       const fromX = parseFloat(from.style.left);
       const toX = parseFloat(to.style.left);
       connector.style.left = `${fromX + blockWidth}px`;
       connector.style.width = `${toX - (fromX + blockWidth)}px`;
-      container.appendChild(connector);
-      connectors.push({connector, from, to});
-    }
+    });
+  }
 
-    function updateConnectors() {
-      connectors.forEach(({connector, from, to}) => {
-        const fromX = parseFloat(from.style.left);
-        const toX = parseFloat(to.style.left);
-        connector.style.left = `${fromX + blockWidth}px`;
-        connector.style.width = `${toX - (fromX + blockWidth)}px`;
-      });
-    }
+  function dropCoin() {
+    const coin = document.createElement("div");
+    coin.className = "coin";
+    const logo = document.createElement("img");
+    logo.src = "/assets/VuneCoinLogoTradeMark--PNG.png";
+    logo.alt = "VuneCoin Coin";
+    coin.appendChild(logo);
+    container.appendChild(coin);
+  }
 
-    function dropCoin() {
-      const coin = document.createElement("div");
-      coin.className = "coin";
-      const logo = document.createElement("img");
-      logo.src = "/assets/VuneCoinLogoTradeMark--PNG.png";
-      logo.alt = "VuneCoin Coin";
-      coin.appendChild(logo);
-      container.appendChild(coin);
-    }
+  function addBlock(index) {
+    const block = createBlock(window.innerWidth + index * blockSpacing);
+    blocks.push(block);
 
-    function addBlock(index) {
-      const block = createBlock(window.innerWidth + index * blockSpacing);
-      blocks.push(block);
+    const moveInDelay = 500 + index * 4000;
+    const connectDelay = moveInDelay + 2000;
+    const shiftDelay = connectDelay + 1000;
 
-      const moveInDelay = 500 + index * 4000;
-      const connectDelay = moveInDelay + 2000;
-      const shiftDelay = connectDelay + 1000;
-
+    if (index === 0) {
+      setTimeout(() => {
+        block.style.left = `${walletCenterX - blockWidth / 2}px`;
+      }, 500);
+    } else {
       setTimeout(() => {
         block.style.left = `${walletCenterX + blockSpacing - blockWidth / 2}px`;
       }, moveInDelay);
 
-      if (index === 0) {
-  setTimeout(() => {
-    block.style.left = `${walletCenterX - blockWidth / 2}px`;
-  }, 500);
-} else {
-  setTimeout(() => {
-    block.style.left = `${walletCenterX + blockSpacing - blockWidth / 2}px`;
-  }, moveInDelay);
+      setTimeout(() => {
+        createConnector(blocks[index - 1], blocks[index]);
+        dropCoin();
 
-  setTimeout(() => {
-    createConnector(blocks[index - 1], blocks[index]);
-    dropCoin();
+        setTimeout(() => {
+          for (let j = 0; j <= index; j++) {
+            const newLeft = walletCenterX - (index - j + 0.5) * blockSpacing;
+            blocks[j].style.left = `${newLeft}px`;
+          }
+          updateConnectors();
+        }, 1000);
+      }, connectDelay);
+    }
+  }
 
-    setTimeout(() => {
-      for (let j = 0; j <= index; j++) {
-        const newLeft = walletCenterX - (index - j + 0.5) * blockSpacing;
-        blocks[j].style.left = `${newLeft}px`;
-      }
-      updateConnectors();
-    }, 1000);
-  }, connectDelay);
-}
-
+  window.onload = () => {
     for (let i = 0; i < 20; i++) {
       addBlock(i);
     }
-  </script>
+  };
+</script>
 </body>
 </html>
 
