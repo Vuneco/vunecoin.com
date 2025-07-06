@@ -14,16 +14,14 @@
   <link rel="icon" type="image/png" href="/assets/VuneCoinLogoTradeMark--PNG.png">
   <title>VuneCoin – Die Zukunft der Blockchain</title>
   <style>
+    
     body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  color: white;
-  background: black;
-  background-image: linear-gradient(#0ff1 1px, transparent 1px),
-                    linear-gradient(90deg, #0ff1 1px, transparent 1px);
-  background-size: 40px 40px;
-  animation: backgroundScroll 30s linear infinite;
-}
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #000;
+      color: #fff;
+      overflow-x: hidden;
+    }
 
     header {
       background: linear-gradient(135deg, #0ff, #08f);
@@ -241,6 +239,11 @@
   </style>
 </head>
 <body>
+  <svg id="neuralBackground" width="100%" height="100%" viewBox="0 0 1920 1080"
+     preserveAspectRatio="none"
+     style="position: fixed; top: 0; left: 0; z-index: 0; pointer-events: none;">
+</svg>
+
   <header>
     <h1>VuneCoin – Die Zukunft der Blockchain beginnt hier</h1>
   </header>
@@ -368,7 +371,57 @@
 window.addEventListener('load', () => {
   setTimeout(() => addBlock(0), 100);
 });
-    
+    const svg = document.getElementById("neuralBackground");
+const width = window.innerWidth;
+const height = window.innerHeight;
+const nodes = [];
+const lines = [];
+
+function createNetwork() {
+  for (let i = 0; i < 40; i++) {
+    const node = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    const x = Math.random() * width;
+    const y = Math.random() * height;
+    node.setAttribute("cx", x);
+    node.setAttribute("cy", y);
+    node.setAttribute("r", 3);
+    node.setAttribute("fill", "#0ff");
+    node.setAttribute("opacity", "0.15");
+    svg.appendChild(node);
+    nodes.push({ el: node, x, y });
+  }
+
+  for (let i = 0; i < nodes.length; i++) {
+    for (let j = i + 1; j < nodes.length; j++) {
+      const dx = nodes[i].x - nodes[j].x;
+      const dy = nodes[i].y - nodes[j].y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 200) {
+        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        line.setAttribute("x1", nodes[i].x);
+        line.setAttribute("y1", nodes[i].y);
+        line.setAttribute("x2", nodes[j].x);
+        line.setAttribute("y2", nodes[j].y);
+        line.setAttribute("stroke", "#0ff");
+        line.setAttribute("stroke-opacity", "0.04");
+        svg.appendChild(line);
+        lines.push(line);
+      }
+    }
+  }
+}
+
+function animateNodes() {
+  setInterval(() => {
+    const node = nodes[Math.floor(Math.random() * nodes.length)];
+    node.el.setAttribute("opacity", "1");
+    setTimeout(() => node.el.setAttribute("opacity", "0.15"), 600);
+  }, 300);
+}
+
+createNetwork();
+animateNodes();
+
 </script>
 </body>
 </html>
