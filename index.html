@@ -294,78 +294,38 @@
     }
 
     // Main function to add and animate a single block in the chain
-    function addBlock(i) { //
-      console.log("addBlock() called for index:", i); //
-      const walletCenterX = getWalletCenterX(); //
-      const targetActiveBlockLeft = walletCenterX - blockWidth / 2; //
-      console.log("Target active block left (centered):", targetActiveBlockLeft); //
+    function addBlock(i) {
+  const walletCenterX = getWalletCenterX();
+  const block = createBlock(window.innerWidth + i * blockSpacing);
+  blocks.push(block);
 
-      const block = createBlock(); //
-      blocks.push(block); //
+  const moveInDelay = i === 0 ? 0 : 500 + i * 2000;
+  const connectDelay = moveInDelay + 2000;
 
-      if (i === 0) { //
-        // --- Animation for the First Block ---
-        console.log("Adding first block (index 0)."); //
-        // 1. Set initial off-screen position.
-        block.style.left = `${container.offsetWidth}px`; //
-        console.log("Block 0 initial position (off-screen):", block.style.left); //
+  if (i === 0) {
+    setTimeout(() => {
+      block.style.left = `${walletCenterX - blockWidth / 2}px`;
+    }, moveInDelay);
+  } else {
+    setTimeout(() => {
+      block.style.left = `${walletCenterX + blockSpacing - blockWidth / 2}px`;
+    }, moveInDelay);
 
-        // 2. Force a reflow to ensure the browser registers the initial position.
-        block.offsetWidth; // Do not remove this line! //
+    setTimeout(() => {
+      createConnector(blocks[i - 1], blocks[i]);
+      dropCoin();
 
-        // 3. Animate to the centered position using requestAnimationFrame
-        requestAnimationFrame(() => { //
-          block.style.left = `${targetActiveBlockLeft}px`; //
-          console.log("Block 0 animating to target position:", block.style.left); //
-        });
+      setTimeout(() => {
+        for (let j = 0; j <= i; j++) {
+          const newLeft = walletCenterX - (i - j + 0.5) * blockSpacing;
+          blocks[j].style.left = `${newLeft}px`;
+        }
+        updateAllConnectors();
+      }, 1000);
+    }, connectDelay);
+  }
+}
 
-      } else { //
-        // --- Animation for Subsequent Blocks (i > 0) ---
-        console.log("Adding subsequent block (index > 0). Current index:", i); //
-
-        // 1. Set initial off-screen position for the new block
-        block.style.left = `${container.offsetWidth}px`; //
-        console.log("Block", i, "initial position (off-screen):", block.style.left); //
-
-        // 2. Force a reflow for this block too
-        block.offsetWidth; //
-
-        // Step 1: Animate the new block entering from the right
-        setTimeout(() => { //
-          const lastBlockLeft = parseFloat(blocks[i-1].style.left); //
-          block.style.left = `${lastBlockLeft + blockWidth + blockSpacing}px`; //
-          console.log("Block", i, "moving into pre-shift position:", block.style.left); //
-        }, 100); // Small delay to allow initial placement and transition to begin //
-
-        // Step 2: Create connection and drop coin (after the new block has "arrived" at its pre-shift position)
-        setTimeout(() => { //
-          console.log("Block", i, ": Connecting and dropping coin."); //
-          // Ensure blocks[i-1] is defined before creating connector
-          if (blocks[i-1]) { //
-            createConnector(blocks[i - 1], blocks[i]); //
-          } else {
-            console.error("Previous block (blocks[i-1]) is undefined when trying to create connector for block", i);
-          }
-          dropCoin(); //
-        }, 1000); // 1 second after addBlock is called for this block, gives time for block to arrive //
-
-        // Step 3: Shift all blocks to the left (after connection and coin drop)
-        setTimeout(() => { //
-          console.log("Block", i, ": Shifting all blocks."); //
-          // Calculate how much to shift to make blocks[i] (the newest block) centered
-          const currentNewBlockLeft = parseFloat(blocks[i].style.left); //
-          const shiftAmount = currentNewBlockLeft - targetActiveBlockLeft; //
-          console.log("Shift amount for blocks:", shiftAmount); //
-
-          for (let j = 0; j <= i; j++) { //
-            const currentLeft = parseFloat(blocks[j].style.left); //
-            blocks[j].style.left = `${currentLeft - shiftAmount}px`; //
-            console.log(`Block ${j} new left position:`, blocks[j].style.left); //
-          }
-          updateAllConnectors(); //
-        }, 2000); // 2 seconds after addBlock is called for this block (total delay) //
-      }
-    }
 
     // Start the blockchain animation when the entire page is loaded.
     // This ensures all elements are available and avoids re-triggering.
