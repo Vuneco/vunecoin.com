@@ -198,9 +198,9 @@
   const connectors = [];
 
   function getWalletCenterX() {
-    const rect = wallet.getBoundingClientRect();
-    return rect.left + rect.width / 2;
-  }
+  const rect = wallet.getBoundingClientRect();
+  return rect.left + rect.width / 2;
+}
 
   function createBlock(x) {
     const block = document.createElement("div");
@@ -252,45 +252,43 @@
   }
 
   function addBlock(index) {
-    const block = createBlock(window.innerWidth + index * blockSpacing);
-    blocks.push(block);
+  const block = createBlock(window.innerWidth + index * blockSpacing);
+  blocks.push(block);
 
-    const moveInDelay = 500 + index * 4000;
-    const connectDelay = moveInDelay + 2000;
-    const shiftDelay = connectDelay + 1000;
+  const moveInDelay = 500 + index * 4000;
+  const connectDelay = moveInDelay + 2000;
 
-    if (index === 0) {
-  setTimeout(() => {
-    const walletCenter = wallet.offsetLeft + wallet.offsetWidth / 2;
-    block.style.left = `${walletCenter - blockWidth / 2}px`;
-
-    // Starte die Kette weiter
+  if (index === 0) {
     setTimeout(() => {
-      addBlock(1);
-    }, 2000);
-  }, moveInDelay);
-}
-} else {
-  setTimeout(() => {
-    block.style.left = `${wallet.offsetLeft + wallet.offsetWidth / 2 + blockSpacing - blockWidth / 2}px`;
-  }, moveInDelay);
-
-  setTimeout(() => {
-    createConnector(blocks[index - 1], blocks[index]);
-    dropCoin();
+      const center = getWalletCenterX();
+      block.style.left = `${center - blockWidth / 2}px`;
+    }, moveInDelay);
 
     setTimeout(() => {
-      for (let j = 0; j <= index; j++) {
-        const newLeft = wallet.offsetLeft + wallet.offsetWidth / 2 - (index - j + 0.5) * blockSpacing;
-        blocks[j].style.left = `${newLeft}px`;
-      }
-      updateConnectors();
-      addBlock(index + 1); // nächste Runde
-    }, 1000);
-  }, connectDelay);
-}
+      addBlock(index + 1);
+    }, connectDelay + 1000);
+  } else {
+    setTimeout(() => {
+      const center = getWalletCenterX();
+      block.style.left = `${center + blockSpacing - blockWidth / 2}px`;
+    }, moveInDelay);
 
+    setTimeout(() => {
+      createConnector(blocks[index - 1], blocks[index]);
+      dropCoin();
+
+      setTimeout(() => {
+        const center = getWalletCenterX();
+        for (let j = 0; j <= index; j++) {
+          const newLeft = center - (index - j + 0.5) * blockSpacing;
+          blocks[j].style.left = `${newLeft}px`;
+        }
+        updateConnectors();
+        addBlock(index + 1);
+      }, 1000);
+    }, connectDelay);
   }
+}
 window.addEventListener('load', () => {
   setTimeout(() => addBlock(0), 100);
 });
