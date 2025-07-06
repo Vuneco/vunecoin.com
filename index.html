@@ -261,8 +261,15 @@
 
     if (index === 0) {
   setTimeout(() => {
-    block.style.left = `${wallet.offsetLeft + wallet.offsetWidth / 2 - blockWidth / 2}px`;
+    const walletCenter = wallet.offsetLeft + wallet.offsetWidth / 2;
+    block.style.left = `${walletCenter - blockWidth / 2}px`;
+
+    // Starte die Kette weiter
+    setTimeout(() => {
+      addBlock(1);
+    }, 2000);
   }, moveInDelay);
+}
 } else {
   setTimeout(() => {
     block.style.left = `${wallet.offsetLeft + wallet.offsetWidth / 2 + blockSpacing - blockWidth / 2}px`;
