@@ -175,13 +175,13 @@
 
   <div class="animation-container" id="animationContainer">
     <div class="wallet">
-      <img src="assets/VuneCoinLogoTradeMark--PNG.png" alt="VuneCoin Logo" />
+      <img src="/assets/VuneCoinLogoTradeMark--PNG.png" alt="VuneCoin Logo" />
       VuneCoin
     </div>
   </div>
 
   <div class="cta">
-    <a href="https://ico.vunecoin.com" target="_blank">Jetzt VuneCoin entdecken</a>
+    <a href="https://vunecoin.com" target="_blank">Jetzt VuneCoin entdecken</a>
   </div>
 
   <footer>
@@ -191,12 +191,13 @@
   <script>
     const container = document.getElementById("animationContainer");
     const wallet = container.querySelector(".wallet");
+    const walletCenterX = wallet.offsetLeft + wallet.offsetWidth / 2;
     const blockWidth = 100;
     const blockSpacing = 120;
     const blocks = [];
     const connectors = [];
 
-    function getWalletCenterX() {
+function getWalletCenterX() {
       const rect = wallet.getBoundingClientRect();
       return rect.left + rect.width / 2;
     }
@@ -207,7 +208,7 @@
       block.style.left = `${x}px`;
 
       const logo = document.createElement("img");
-      logo.src = "assets/VuneCoinLogoTradeMark--PNG.png";
+      logo.src = "/assets/VuneCoinLogoTradeMark--PNG.png";
       logo.alt = "VuneCoin Logo";
 
       const label = document.createElement("span");
@@ -223,21 +224,20 @@
     function createConnector(from, to) {
       const connector = document.createElement("div");
       connector.className = "connector";
-      container.appendChild(connector);
-      connectors.push({connector, from, to});
-      updateConnector(connector, from, to);
-    }
-
-    function updateConnector(connector, from, to) {
       const fromX = parseFloat(from.style.left);
       const toX = parseFloat(to.style.left);
       connector.style.left = `${fromX + blockWidth}px`;
       connector.style.width = `${toX - (fromX + blockWidth)}px`;
+      container.appendChild(connector);
+      connectors.push({connector, from, to});
     }
 
-    function updateAllConnectors() {
+    function updateConnectors() {
       connectors.forEach(({connector, from, to}) => {
-        updateConnector(connector, from, to);
+        const fromX = parseFloat(from.style.left);
+        const toX = parseFloat(to.style.left);
+        connector.style.left = `${fromX + blockWidth}px`;
+        connector.style.width = `${toX - (fromX + blockWidth)}px`;
       });
     }
 
@@ -245,61 +245,52 @@
       const coin = document.createElement("div");
       coin.className = "coin";
       const logo = document.createElement("img");
-      logo.src = "assets/VuneCoinLogoTradeMark--PNG.png";
+      logo.src = "/assets/VuneCoinLogoTradeMark--PNG.png";
       logo.alt = "VuneCoin Coin";
       coin.appendChild(logo);
       container.appendChild(coin);
     }
 
-    let index = parseInt(localStorage.getItem("blockIndex") || "0");
+    function addBlock(index) {
+      const block = createBlock(window.innerWidth + index * blockSpacing);
+      blocks.push(block);
 
-    function addBlock(i) {
-  const walletCenterX = getWalletCenterX();
-
-  // 🔁 Unterschied: Erster Block direkt korrekt platzieren
-  const startX = i === 0
-    ? walletCenterX - blockWidth / 2
-    : window.innerWidth + i * blockSpacing;
-
-  const block = createBlock(startX);
-  blocks.push(block);
-
-  const moveInDelay = 500 + i * 2000;
-  const connectDelay = moveInDelay + 2000;
-
-  if (i !== 0) {
-    setTimeout(() => {
-      block.style.left = `${walletCenterX + blockSpacing - blockWidth / 2}px`;
-    }, moveInDelay);
-
-    setTimeout(() => {
-      createConnector(blocks[i - 1], blocks[i]);
-      dropCoin();
+      const moveInDelay = 500 + index * 4000;
+      const connectDelay = moveInDelay + 2000;
+      const shiftDelay = connectDelay + 1000;
 
       setTimeout(() => {
-        for (let j = 0; j <= i; j++) {
-          const newLeft = walletCenterX - (i - j + 0.5) * blockSpacing;
-          blocks[j].style.left = `${newLeft}px`;
-        }
-        updateAllConnectors();
-      }, 1000);
-    }, connectDelay);
-  }
+        block.style.left = `${walletCenterX + blockSpacing - blockWidth / 2}px`;
+      }, moveInDelay);
+
+      if (index === 0) {
+  setTimeout(() => {
+    block.style.left = `${walletCenterX - blockWidth / 2}px`;
+  }, 500);
+} else {
+  setTimeout(() => {
+    block.style.left = `${walletCenterX + blockSpacing - blockWidth / 2}px`;
+  }, moveInDelay);
+
+  setTimeout(() => {
+    createConnector(blocks[index - 1], blocks[index]);
+    dropCoin();
+
+    setTimeout(() => {
+      for (let j = 0; j <= index; j++) {
+        const newLeft = walletCenterX - (index - j + 0.5) * blockSpacing;
+        blocks[j].style.left = `${newLeft}px`;
+      }
+      updateConnectors();
+    }, 1000);
+  }, connectDelay);
 }
 
-// ❗ Diese Funktion MUSS außerhalb stehen:
-function startChain() {
-  addBlock(index);
-  index++;
-  localStorage.setItem("blockIndex", index);
-  setTimeout(startChain, 2000);
-}
-
-window.onload = () => {
-  startChain();
-};
-
-
+    for (let i = 0; i < 20; i++) {
+      addBlock(i);
+    }
   </script>
 </body>
 </html>
+
+
