@@ -266,20 +266,18 @@
       }, 500);
     } else {
       setTimeout(() => {
-        block.style.left = `${walletCenterX + blockSpacing - blockWidth / 2}px`;
+        if (index === 0) {
+       block.style.left = `${walletX - blockWidth / 2}px`;
       }, moveInDelay);
 
       setTimeout(() => {
-        createConnector(blocks[index - 1], blocks[index]);
-        dropCoin();
-
-        setTimeout(() => {
-          for (let j = 0; j <= index; j++) {
-            const newLeft = walletCenterX - (index - j + 0.5) * blockSpacing;
-            blocks[j].style.left = `${newLeft}px`;
-          }
-          updateConnectors();
-        }, 1000);
+  for (let j = 0; j <= index; j++) {
+    const newLeft = walletX - (index - j + 0.5) * blockSpacing;
+    blocks[j].style.left = `${newLeft}px`;
+  }
+  updateConnectors();
+  addBlock(++blockIndex); // nächste Runde
+}, 1000);
       }, connectDelay);
     }
   }
