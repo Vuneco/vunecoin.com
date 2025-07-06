@@ -69,31 +69,16 @@ header h1 {
       overflow: hidden;
     }
 
-    .wallet {
-      width: 160px;
-      height: 100px;
-      background: #222;
-      border: 2px solid #0ff;
-      border-radius: 20px;
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      align-items: center;
-      padding-bottom: 0.5rem;
-      color: #0ff;
-      font-weight: bold;
-      z-index: 1;
-    }
-
-    .wallet img {
-      width: 40px;
-      height: 40px;
-    }
-
+    .wallet-image {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 160px;
+  height: 100px;
+  z-index: 1;
+  pointer-events: none;
+}
 
     .block {
   position: absolute;
@@ -279,10 +264,7 @@ header h1 {
   </section>
 
   <div class="animation-container" id="animationContainer">
-    <div class="wallet">
-      <img src="/assets/VuneCoinLogoTradeMark--PNG.png" alt="VuneCoin Logo" />
-      VuneCoin
-    </div>
+    <img class="wallet-image" src="/assets/vunecoin-wallet.png" alt="VuneCoin Wallet" />
   </div>
 
   <div class="cta">
