@@ -125,43 +125,29 @@ header h1 {
 }
 
     .wallet {
-  width: 280px;
-  height: 160px;
-  background: linear-gradient(145deg, #111, #1a1a1a);
-  border: 2px solid #0ff;
-  border-radius: 16px;
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  padding: 1rem;
-  color: #0ff;
-  font-family: 'Segoe UI', sans-serif;
-  z-index: 2;
-  backdrop-filter: blur(2px);
-}
+      width: 160px;
+      height: 100px;
+      background: #222;
+      border: 2px solid #0ff;
+      border-radius: 20px;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      padding-bottom: 0.5rem;
+      color: #0ff;
+      font-weight: bold;
+      z-index: 1;
+    }
 
-.wallet img {
-  width: 50px;
-  height: 50px;
-}
-
-.wallet-title {
-  font-size: 1.1rem;
-  font-weight: bold;
-  letter-spacing: 1px;
-}
-
-.wallet-balance {
-  font-size: 1.3rem;
-  font-weight: bold;
-  color: #fff;
-}
+    .wallet img {
+      width: 40px;
+      height: 40px;
+    }
 
     .block {
   position: absolute;
@@ -351,11 +337,12 @@ header h1 {
     <p>Willkommen bei <strong>VuneCoin</strong> – einer neuen Generation von Kryptowährungen, die auf Geschwindigkeit, Vertrauen und Transparenz setzt. Unsere Blockchain ist nicht nur Technologie, sie ist Bewegung. Jeder Block sichert nicht nur Daten, sondern auch dein Vertrauen.</p>
   </section>
 
-  <div class="wallet">
-  <img src="/assets/VuneCoinLogoTradeMark--PNG.png" alt="VuneCoin Logo" />
-  <div class="wallet-title">VuneCoin Wallet</div>
-  <div class="wallet-balance">1.350 VNC</div>
-</div>
+  <div class="animation-container" id="animationContainer">
+    <div class="wallet">
+      <img src="/assets/VuneCoinLogoTradeMark--PNG.png" alt="VuneCoin Logo" />
+      VuneCoin
+    </div>
+  </div>
 
   
   <section class="coin-comparison">
