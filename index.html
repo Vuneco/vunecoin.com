@@ -125,29 +125,44 @@ header h1 {
 }
 
     .wallet {
-      width: 160px;
-      height: 100px;
-      background: #222;
-      border: 2px solid #0ff;
-      border-radius: 20px;
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      align-items: center;
-      padding-bottom: 0.5rem;
-      color: #0ff;
-      font-weight: bold;
-      z-index: 1;
-    }
+  width: 260px;
+  height: 140px;
+  background: linear-gradient(135deg, #111, #1a1a1a);
+  border-radius: 18px;
+  border: 1px solid #00ffff55;
+  box-shadow: 0 0 20px rgba(0,255,255,0.25), 0 0 60px rgba(0,255,255,0.05);
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #00ffff;
+  font-family: 'Segoe UI', sans-serif;
+  z-index: 2;
+  text-align: center;
+  padding: 1rem;
+}
 
-    .wallet img {
-      width: 40px;
-      height: 40px;
-    }
+.wallet img {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 0.5rem;
+  filter: drop-shadow(0 0 6px rgba(0,255,255,0.3));
+}
+
+.wallet::before {
+  content: "VuneCoin Wallet";
+  display: block;
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 0.2rem;
+  color: #fff;
+  opacity: 0.9;
+}
+
 
     .block {
   position: absolute;
