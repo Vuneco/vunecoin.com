@@ -126,8 +126,8 @@ header h1 {
 }
 
     .wallet {
-  width: 260px;
-  height: 140px;
+  width: 280px;
+  height: 160px;
   background: linear-gradient(135deg, #111, #1a1a1a);
   border-radius: 18px;
   border: 1px solid #00ffff55;
@@ -137,9 +137,8 @@ header h1 {
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
   color: #00ffff;
   font-family: 'Segoe UI', sans-serif;
   z-index: 2;
@@ -147,23 +146,37 @@ header h1 {
   padding: 1rem;
 }
 
+.wallet-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .wallet img {
   width: 48px;
   height: 48px;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.3rem;
   filter: drop-shadow(0 0 6px rgba(0,255,255,0.3));
 }
 
-.wallet::before {
-  content: "VuneCoin Wallet";
-  display: block;
-  font-weight: bold;
+.wallet-title {
   font-size: 1.1rem;
-  margin-bottom: 0.2rem;
+  font-weight: bold;
   color: #fff;
-  opacity: 0.9;
 }
 
+.wallet-qr img {
+  width: 70px;
+  height: 70px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,255,255,0.3);
+  transition: transform 0.2s ease;
+}
+
+.wallet-qr:hover img {
+  transform: scale(1.05);
+}
 
     .block {
   position: absolute;
@@ -355,9 +368,14 @@ header h1 {
 
   <div class="animation-container" id="animationContainer">
     <div class="wallet">
-      <img src="/assets/VuneCoinLogoTradeMark--PNG.png" alt="VuneCoin Logo" />
-      VuneCoin
-    </div>
+  <div class="wallet-left">
+    <img src="/assets/VuneCoinLogoTradeMark--PNG.png" alt="VuneCoin Logo" />
+    <div class="wallet-title">VuneCoin Wallet</div>
+  </div>
+  <a href="https://ico.vunecoin.com" target="_blank" class="wallet-qr">
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=https://ico.vunecoin.com" alt="QR Code zur ICO-Seite" />
+  </a>
+</div>
   </div>
 
   
