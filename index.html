@@ -138,44 +138,6 @@ header h1 {
 .coin-comparison td {
   background-color: #111;
 }
-    .wallet-head-extra {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 2rem;
-  padding: 2rem;
-}
-
-.wallet-head-text {
-  flex: 1 1 300px;
-  text-align: center;
-}
-
-.wallet-head-text img {
-  max-width: 100px;
-  margin-bottom: 0.5rem;
-}
-
-.wallet-subtext {
-  font-size: 1rem;
-  color: #ccc;
-  margin-top: 0.5rem;
-}
-
-.wallet-trustbox {
-  flex: 1 1 300px;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  font-size: 1rem;
-  background: rgba(255,255,255,0.05);
-  padding: 1rem;
-  border-radius: 12px;
-  color: white;
-  text-align: left;
-  border: 1px solid rgba(255,255,255,0.1);
-}
 
     .wallet {
   width: 280px;
@@ -433,20 +395,11 @@ header h1 {
   </section>
 
   <div class="animation-container" id="animationContainer">
-    <div class="wallet-head-extra">
-  <div class="wallet-head-text">
+    <div class="wallet">
+  <div class="wallet-left">
     <img src="/assets/VuneCoinLogoTradeMark--PNG.png" alt="VuneCoin Logo" />
     <div class="wallet-title">VuneCoin Wallet</div>
-    <p class="wallet-subtext">Dein Ticket für die nächste Krypto-Ära</p>
   </div>
-  
-  <div class="wallet-trustbox">
-    <div class="trust-item">🔒 Verifiziert mit ElionTrust</div>
-    <div class="trust-item">📦 40 Mio Coins | 25 Mio im ICO</div>
-    <div class="trust-item">🚀 ICO Start: Q3 2025</div>
-  </div>
-</div>
-
   <a href="https://ico.vunecoin.com" target="_blank" class="wallet-qr">
     <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=https://ico.vunecoin.com" alt="QR Code zur ICO-Seite" />
   </a>
