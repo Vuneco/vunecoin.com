@@ -447,6 +447,76 @@ header h1 {
   line-height: 1.6;
   color: #ddd;
 }
+
+    .footer-about-link {
+    text-align: center;
+    margin-top: 30px;
+  }
+  .about-button {
+    background-color: #800000;
+    color: #fff;
+    padding: 10px 24px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s ease;
+  }
+  .about-button:hover {
+    background-color: #a00000;
+  }
+
+  .about-overlay {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background-color: rgba(0,0,0,0.7);
+  backdrop-filter: blur(6px);
+  animation: fadeIn 0.8s ease-in-out;
+}
+   
+
+.about-modal {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 95%;
+  max-width: 1200px;
+  height: 90%;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  animation: slideUp 0.8s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+    
+
+.about-modal iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+  .close-about {
+    position: absolute;
+    top: 8px; right: 12px;
+    background: transparent;
+    font-size: 24px;
+    border: none;
+    cursor: pointer;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes slideUp {
+    from { transform: translate(-50%, 100%); }
+    to { transform: translate(-50%, -50%); }
+  }
+
     
   </style>
 
@@ -748,6 +818,91 @@ createNetwork();
 animateNodes();
 
 </script>
+
+<div id="aboutOverlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:1000;"></div>
+   
+   <div class="footer-about-link">
+  <button id="aboutBtn" class="about-button">Über Leylix</button>
+</div>
+
+<p>© 2021–<script>document.write(new Date().getFullYear())</script> Leylix – Alle Rechte vorbehalten</p>
+
+<div id="aboutModal" style="
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 1rem;
+  border-radius: 12px;
+  width: 95%;
+  max-width: 1200px;
+  height: 90%;
+  z-index: 1001;
+  overflow: hidden;
+">
+  <iframe src="https://seo.leylix.com/about.html" style="
+    width: 100%;
+    height: 100%;
+    border: none;
+  "></iframe>
+
+  <div style="
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1002;
+    background: rgba(255,255,255,0.9);
+    padding: 6px 10px;
+    border-radius: 6px;
+  ">
+    <button onclick="closeAbout()" style="
+      background: #800000;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+    ">Schließen</button>
+  </div>
+</div>
+
+  <script>
+document.getElementById('aboutBtn').addEventListener('click', function() {
+  document.getElementById('aboutOverlay').style.display = 'block';
+  document.getElementById('aboutModal').style.display = 'block';
+});
+
+function closeAbout() {
+  document.getElementById('aboutOverlay').style.display = 'none';
+  document.getElementById('aboutModal').style.display = 'none';
+}
+</script>
+
+  <script>
+  const aboutBtn = document.getElementById("aboutBtn");
+  const aboutOverlay = document.getElementById("aboutOverlay");
+  const closeAbout = document.getElementById("closeAbout");
+
+  if (aboutBtn && aboutOverlay && closeAbout) {
+    aboutBtn.addEventListener("click", () => {
+      aboutOverlay.style.display = "block";
+    });
+
+    closeAbout.addEventListener("click", () => {
+      aboutOverlay.style.display = "none";
+    });
+
+    // Optional: Klicken außerhalb des Modals schließt Fenster
+    window.addEventListener("click", (e) => {
+      if (e.target === aboutOverlay) {
+        aboutOverlay.style.display = "none";
+      }
+    });
+  }
+</script>
+  
 </body>
 </html>
 
