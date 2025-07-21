@@ -820,12 +820,16 @@ animateNodes();
 </script>
 
 <div id="aboutOverlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:1000;"></div>
-   
-   <div class="footer-about-link">
-  <button id="aboutBtn" class="about-button">Über Leylix</button>
-</div>
+  
+  <footer style="text-align: center; margin-top: 40px;">
+  <button id="aboutBtn" class="about-button" style="background:#800000; color:#fff; border:none; padding:0.5rem 1rem; border-radius:5px; cursor:pointer;">
+    Über Leylix
+  </button>
 
-<p>© 2021–<script>document.write(new Date().getFullYear())</script> Leylix – Alle Rechte vorbehalten</p>
+  <p style="margin-top: 10px; text-align: center;">
+    © 2021–<script>document.write(new Date().getFullYear())</script> Leylix – Alle Rechte vorbehalten
+  </p>
+</footer>
 
 <div id="aboutModal" style="
   display: none;
