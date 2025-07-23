@@ -905,6 +905,23 @@ function closeAbout() {
     });
   }
 </script>
+
+  //Ab hier ist wegen smooze scrolling! Es dürfen aber keine anderen codes für diese geste sein. Wenn doch funktioniert es nicht richtig!!!
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.18/bundled/lenis.min.js"></script>
+<script>
+  const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    smooth: true
+  });
+
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+
+  requestAnimationFrame(raf);
+</script>
   
 </body>
 </html>
