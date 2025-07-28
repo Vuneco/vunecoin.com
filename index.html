@@ -924,78 +924,7 @@ function closeAbout() {
   requestAnimationFrame(raf);
 </script>
 
-   <script>
-  fetch("/includes/popup-vunecoin.html")
-    .then(res => res.text())
-    .then(html => {
-      const div = document.createElement("div");
-      div.innerHTML = html;
-      document.body.appendChild(div);
-    });
-</script>
-
-  <script>
-  // Pop-up schließen, wenn man außerhalb klickt
-  document.addEventListener('click', function(event) {
-    const popup = document.getElementById('vunePopup');
-    if (popup && event.target === popup) {
-      popup.style.display = 'none';
-    }
-  });
-</script>
-
-  <script>
-  window.addEventListener("load", function () {
-    setTimeout(function () {
-      const popup = document.getElementById("vunePopup");
-      if (popup) {
-        popup.style.display = "flex";
-        setTimeout(() => popup.classList.add("show"), 50);
-        
-        // ✅ Stelle sicher, dass Body scrollbar bleibt
-        document.body.style.overflow = "auto";
-
-        // ✅ Scroll nur im Popup blockieren
-        const popupContent = popup.querySelector("div"); // das innere weiße Div
-        if (popupContent) {
-          popupContent.addEventListener("wheel", function (e) {
-            e.stopPropagation();
-          });
-        }
-      }
-    }, 5000); // ⏱️ Popup nach 5 Sekunden
-  });
-</script>
-
-   <script>
-  const targetDate = new Date("2025-08-30T23:59:59").getTime();
-
-  const updateCountdown = () => {
-    const now = new Date().getTime();
-    const distance = targetDate - now;
-
-    if (distance < 0) {
-      document.getElementById("days").innerText = "0";
-      document.getElementById("hours").innerText = "0";
-      document.getElementById("minutes").innerText = "0";
-      document.getElementById("seconds").innerText = "0";
-      return;
-    }
-
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    document.getElementById("days").innerText = days;
-    document.getElementById("hours").innerText = hours;
-    document.getElementById("minutes").innerText = minutes;
-    document.getElementById("seconds").innerText = seconds;
-  };
-
-  setInterval(updateCountdown, 1000);
-  updateCountdown();
-</script>
+   
   
 </body>
 </html>
