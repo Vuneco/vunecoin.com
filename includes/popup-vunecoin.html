@@ -1,0 +1,246 @@
+<!-- VuneCoin Pop-Up -->
+<div id="vunePopup" style="display: flex; align-items: center; justify-content: center; position: fixed; inset: 0; background-color: rgba(0,0,0,0.6); z-index: 9999;">
+  <div style="
+  position: relative;
+  background: white;
+  padding: 30px 20px;
+  max-width: 520px;
+  width: 90%;
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(0,0,0,0.3);
+  animation: zoomIn 0.4s ease forwards;
+  text-align: center;
+  font-family: sans-serif;
+
+  overflow-y: auto;       /* ✅ Scrollen ermöglichen */
+  max-height: 90vh;       /* ✅ Begrenzung auf Bildschirmhöhe */
+  box-sizing: border-box; /* ✅ Kein Padding-Überlauf */
+">
+    
+    <!-- Logo -->
+    <!-- Fixierter Header -->
+<div class="popup-header" style="
+  position: sticky;
+  top: 0;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  border-bottom: 1px solid #ccc;
+  z-index: 1000;
+  min-height: 60px; /* Wichtig: verhindert Überscrollen */
+">
+  <img src="/assets/logo-vunecoin-icon.png" alt="VuneCoin Logo" style="height: 60px; margin-bottom: 20px;" />
+  <button onclick="document.getElementById('vunePopup').style.display='none'" style="
+    background: #800000;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+  ">&times;</button>
+</div>
+    
+    <!-- Text -->
+<h2 style="margin-bottom: 10px;">VuneCoin – Die Kryptowährung der Zukunft</h2>
+<p style="font-size: 16px; line-height: 1.5; color: #333;">
+  VuneCoin ist mehr als nur ein Coin – er wird das Herzstück für Zahlungen, NFTs und Smart Contracts in <strong>Leylix</strong>  
+  und weiteren innovativen Produkten der <strong>Vuneco GmbH</strong>.<br><br>
+  Wer jetzt investiert, hat die Chance auf ein Vielfaches seiner Investition –  
+  bevor VuneCoin im Ökosystem durchstartet. Frühphasen-Investoren profitieren vom günstigen Einstiegskurs,  
+  exklusiven Features, besonderen Belohnungen und dem Wachstum eines starken Netzwerks.<br><br>
+  Mit deiner Unterstützung treiben wir ein Ökosystem voran,  
+  das echte Lösungen für digitale Herausforderungen schafft.
+</p>
+    <div style="margin-top: 20px; background: #fff6f6; border: 1px solid #80000033; border-radius: 12px; padding: 20px; box-shadow: 0 0 20px rgba(128,0,0,0.15);">
+  <h3 style="color: #800000; text-align: center; margin-bottom: 10px;">Früh investieren. Groß profitieren.</h3>
+  <p style="font-size: 15px; color: #333; line-height: 1.6; text-align: center;">
+    Wer jetzt investiert, hat die Chance auf ein Vielfaches seiner Investition –<br>
+    bevor VuneCoin im Ökosystem von <strong>Leylix</strong> und anderen Produkten durchstartet.<br><br>
+    Frühphasen-Investoren profitieren vom günstigen Einstiegskurs,<br>
+    exklusiven Features, besonderen Belohnungen und dem Wachstum eines starken Netzwerks.
+  </p>
+</div>
+
+  <!-- Countdown Box -->
+<div class="section-box" style="
+  margin-top: 30px;
+  margin-bottom: 30px;
+  background: #fff8f8;
+  border-radius: 16px;
+  padding: 30px 25px;
+  border: 2px solid #80000022;
+  box-shadow: 0 0 25px rgba(128, 0, 0, 0.25);
+  text-align: center;
+  animation: pulseShadow 3s ease-in-out infinite;
+">
+
+  <h3 style="color: #800000; margin-bottom: 20px;">Countdown zum ICO</h3>
+
+  <div style="margin-top: 20px;">
+  <div style="display: flex; justify-content: center; gap: 30px; font-weight: bold; color: #800000;">
+    <div style="text-align: center;">
+      <div>Days</div>
+      <div id="days" style="font-size: 26px; font-family: Arial;">--</div>
+    </div>
+    <div style="text-align: center;">
+      <div>Hours</div>
+      <div id="hours" style="font-size: 26px; font-family: Arial;">--</div>
+    </div>
+    <div style="text-align: center;">
+      <div>Min</div>
+      <div id="minutes" style="font-size: 26px; font-family: Arial;">--</div>
+    </div>
+    <div style="text-align: center;">
+      <div>Sec</div>
+      <div id="seconds" style="font-size: 26px; font-family: Arial;">--</div>
+    </div>
+  </div>
+</div>
+
+
+  <button onclick="window.location.href='https://ico.vunecoin.com'" style="margin-top: 20px; background-color: #800000; color: white; border: none; padding: 12px 24px; font-size: 16px; border-radius: 10px; cursor: pointer;">
+  Jetzt informieren über VuneCoin →
+</button>
+
+  <p style="font-size: 12px; color: #999; margin-top: 10px;">Countdown powered by VuneCoin</p>
+</div> <!-- Ende deiner section-box -->
+   
+  
+    <style>
+@keyframes pulseShadow {
+  0%   { box-shadow: 0 0 20px rgba(128,0,0,0.4); }
+  50%  { box-shadow: 0 0 50px rgba(128,0,0,0.9); }
+  100% { box-shadow: 0 0 20px rgba(128,0,0,0.4); }
+
+  }
+#countdown {
+  animation: pulseShadow 2s infinite;
+}
+</style>
+
+<script>
+  const targetDate = new Date("2025-08-30T23:59:59").getTime();
+
+  const updateCountdown = () => {
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+
+    if (distance < 0) {
+      document.getElementById("days").innerText = "0";
+      document.getElementById("hours").innerText = "0";
+      document.getElementById("minutes").innerText = "0";
+      document.getElementById("seconds").innerText = "0";
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    // Nur die Textwerte in den vorhandenen divs ändern
+    document.getElementById("days").innerText = days;
+    document.getElementById("hours").innerText = hours;
+    document.getElementById("minutes").innerText = minutes;
+    document.getElementById("seconds").innerText = seconds;
+  };
+
+  setInterval(updateCountdown, 1000);
+  updateCountdown();
+</script>
+
+   
+    <ul class="popup-list">
+  <li>Blockchain made in Germany</li>
+  <li>Smart Contracts, NFTs, Payments</li>
+  <li>Reale Anwendung in Events, Sponsoring, Ticketing & Verifizierung</li>
+</ul>
+
+
+    <p style="font-size: 16px; line-height: 1.6; color: #333; margin-top: 20px;">
+  Mit deiner Unterstützung treiben wir ein Ökosystem voran,  
+  das echte Lösungen für digitale Herausforderungen schafft.
+</p>
+<p style="font-size: 16px; line-height: 1.6; color: #333; margin-top: 10px;">
+  Hinter <strong>VuneCoin</strong> & <strong>Leylix</strong> steht <strong>Esat Vurcak</strong>,  
+  Gründer der <strong>Vuneco GmbH</strong> – mit einer klaren Vision für die Zukunft.
+</p>
+
+<hr style="margin-top: 10px; border: none; border-top: 1px solid #ccc;">
+<p style="text-align: center; font-size: 12px; color: #888; margin-top: 10px;">
+  ⚠️ Hinweis: Alle Investitionen sind mit Risiken verbunden. Gewinne können steigen – aber auch schwanken.
+</p>
+   <p style="text-align: center; font-size: 12px; color: #888; margin-top: 10px;">
+  © 2021–2025 Vuneco GmbH · All rights reserved · Powered by VuneCoin
+</p>
+    
+  <style>
+  @keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(128, 0, 0, 0.4); }
+    70% { transform: scale(1.05); box-shadow: 0 0 0 12px rgba(128, 0, 0, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(128, 0, 0, 0); }
+  }
+  
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(128,0,0, 0.6); }
+    70% { box-shadow: 0 0 20px 10px rgba(128,0,0, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(128,0,0, 0); }
+  }
+
+  @keyframes zoomIn {
+    from {
+      transform: scale(0.85);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  </style>
+ <style>
+  /* 🎯 Nur für die Popup-Liste */
+  .popup-list {
+    list-style-type: disc;
+    padding-left: 20px;
+    text-align: left;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+    margin-top: 10px;
+  }
+
+  .popup-list li {
+    position: static !important;
+    padding-left: 0 !important;
+  }
+
+  .popup-list li::before {
+    content: none !important;
+  }
+</style>
+<style>
+  .pulse-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #800000;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 16px;
+    animation: pulse 1.8s infinite;
+    box-shadow: 0 0 10px rgba(128, 0, 0, 0.5);
+    transition: transform 0.2s;
+  }
+
+  .pulse-btn:hover {
+    transform: scale(1.05);
+  }
+  
+</style>
