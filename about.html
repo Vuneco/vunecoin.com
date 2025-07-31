@@ -148,6 +148,31 @@
   100% { transform: translateX(-50%); }
 }
 
+.tech-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 20px;
+  max-width: 240px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease;
+}
+.tech-card:hover {
+  transform: translateY(-5px);
+}
+.tech-card img {
+  height: 60px;
+  margin-bottom: 12px;
+}
+.tech-card h3 {
+  font-size: 18px;
+  color: #800000;
+  margin-bottom: 8px;
+}
+.tech-card p {
+  font-size: 14px;
+  color: #444;
+}
 
 
     
@@ -185,6 +210,30 @@
     <p><strong>Jetzt informieren & mitmachen:</strong>  
       👉 <a href="https://ico.vunecoin.com" target="_blank">ICO-Webseite besuchen</a>
     </p>
+
+<section class="boxed-section">
+  <h2 style="text-align: center; margin-bottom: 40px;">Verwendete Technologien</h2>
+  <div style="display: flex; flex-wrap: wrap; gap: 30px; justify-content: center;">
+    <div class="tech-card">
+      <img src="/assets/html5-icon.png" alt="HTML5" />
+      <h3>HTML5</h3>
+      <p>Strukturierte & semantische Auszeichnungssprache für modernes Webdesign.</p>
+    </div>
+    <div class="tech-card">
+      <img src="/assets/css3-icon.png" alt="CSS3" />
+      <h3>CSS3</h3>
+      <p>Flexible Layouts & moderne Animationen sorgen für gutes Aussehen & Nutzererlebnis.</p>
+    </div>
+    <div class="tech-card">
+      <img src="/assets/javascript-icon.png" alt="JavaScript" />
+      <h3>JavaScript</h3>
+      <p>Interaktive Elemente und dynamisches Verhalten werden mit JS realisiert.</p>
+    </div>
+    <!-- Weitere Cards kannst du hier einfach ergänzen -->
+  </div>
+</section>
+
+    
   </main>
 
   <section class="boxed-section">
