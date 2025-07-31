@@ -77,6 +77,37 @@
       color: #777;
       margin: 30px auto;
     }
+
+.auto-slider {
+  overflow: hidden;
+  position: relative;
+  padding: 20px 0;
+}
+.auto-slider .track {
+  display: flex;
+  gap: 20px;
+  transition: transform 0.5s ease;
+  will-change: transform;
+}
+.auto-slider .card {
+  flex: 0 0 auto;
+  min-width: 280px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  padding: 20px;
+}
+
+    .boxed-section {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 0 18px rgba(0,0,0,0.05);
+  padding: 60px 30px;
+  margin: 40px auto;
+  max-width: 1200px;
+}
+
+    
   </style>
 </head>
 <body>
@@ -112,6 +143,31 @@
     </p>
   </main>
 
+  <section class="boxed-section">
+  <h2>Was ist VuneCoin?</h2>
+  <div class="auto-slider" id="vuneSliderWrapper">
+    <div class="track" id="vuneSlider">
+      <div class="card">
+        <h3>💰 Initialwert</h3>
+        <p>1 VuneCoin = 16,73 USD – begrenzte Stückzahl, frühes Investment mit Potenzial.</p>
+      </div>
+      <div class="card">
+        <h3>⛓️ Eigene Blockchain</h3>
+        <p>Proof-of-Authority Blockchain für Smart Contracts, NFTs, Tickets und Identitäten.</p>
+      </div>
+      <div class="card">
+        <h3>🔗 Verknüpft mit Leylix</h3>
+        <p>Verwendbar für Events, Tickets, Sponsoring, Verifizierungen – direkt im Alltag.</p>
+      </div>
+      <div class="card">
+        <h3>📈 Investieren</h3>
+        <p>Jetzt VuneCoin kaufen auf <a href="https://ico.vunecoin.com">ico.vunecoin.com</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
   <footer>
  <p>© 2021–<script>document.write(new Date().getFullYear())</script> VuneCoin – Alle Rechte vorbehalten</p>
 </footer>
@@ -133,6 +189,33 @@
 
   requestAnimationFrame(raf);
 </script>
+  <script>
+  const track = document.getElementById('vuneSlider');
+  const wrapper = document.getElementById('vuneSliderWrapper');
+
+  let scrollPos = 0;
+  let direction = 1;
+  let isPaused = false;
+
+  function scroll() {
+    if (!isPaused) {
+      scrollPos += direction;
+      track.style.transform = `translateX(-${scrollPos}px)`;
+
+      // Wenn Ende erreicht oder Anfang → Richtung ändern
+      if (scrollPos >= track.scrollWidth - wrapper.offsetWidth || scrollPos <= 0) {
+        direction *= -1;
+      }
+    }
+    requestAnimationFrame(scroll);
+  }
+
+  wrapper.addEventListener('mouseenter', () => isPaused = true);
+  wrapper.addEventListener('mouseleave', () => isPaused = false);
+
+  scroll();
+</script>
+
   
 </body>
 </html>
