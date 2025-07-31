@@ -340,22 +340,41 @@ Erlebe das Blockchain-Event-Ökosystem von morgen – Made in Germany.</h2>
 
 <script>
   const slider = document.querySelector('.vune-slider-track');
-  const speed = 1; // Pixel pro Frame
+  const speed = 0.5; // Geschwindigkeit nach Bedarf anpassen (z.B. 0.5 für langsamer)
 
-  // Dupliziere den Inhalt nur 1x
+  // Dupliziere den Inhalt einmal, um eine nahtlose Schleife zu erstellen
   slider.innerHTML += slider.innerHTML;
 
   let scrollPos = 0;
+  let animationFrameId;
+
   function animate() {
     scrollPos += speed;
-    if (scrollPos >= slider.scrollWidth / 2) {
-      scrollPos = 0;
+
+    // Wenn scrollPos die Breite des ursprünglichen Inhalts überschreitet,
+    // setze es zurück, um eine unendliche Schleife zu simulieren.
+    // Wir benötigen die Breite des *ursprünglichen* Satzes von Boxen, nicht die gesamte duplizierte Breite.
+    // Eine robustere Methode ist, die Breite der ersten Hälfte des Tracks zu messen.
+    const originalContentWidth = slider.scrollWidth / 2; // Da du es einmal dupliziert hast
+
+    if (scrollPos >= originalContentWidth) {
+      scrollPos = 0; // Setze auf den Anfang des ersten Duplikats zurück
     }
+
     slider.style.transform = `translateX(-${scrollPos}px)`;
-    requestAnimationFrame(animate);
+    animationFrameId = requestAnimationFrame(animate);
   }
 
-  animate();
+  animate(); // Starte die Animation
+
+  // Optional: Bei Hover pausieren
+  slider.addEventListener('mouseenter', () => {
+    cancelAnimationFrame(animationFrameId);
+  });
+
+  slider.addEventListener('mouseleave', () => {
+    animate();
+  });
 </script>
 
   
