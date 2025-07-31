@@ -115,8 +115,15 @@
 .vune-slider-track {
   display: flex;
   gap: 40px;
-  animation: scrollLoop 15s linear infinite;
+  width: max-content;
+  animation: scrollLoop 30s linear infinite;
 }
+
+@keyframes scrollLoop {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
 
 .vune-slider-box {
   flex-shrink: 0;
