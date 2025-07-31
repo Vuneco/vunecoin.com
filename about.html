@@ -345,6 +345,25 @@ Erlebe das Blockchain-Event-Ökosystem von morgen – Made in Germany.</h2>
   console.log("Slider-Boxen wurden verdoppelt.");
 </script>
 
+<script>
+  const slider = document.querySelector('.vune-slider-track');
+  const speed = 1; // Pixel pro Frame
+
+  // Dupliziere den Inhalt nur 1x
+  slider.innerHTML += slider.innerHTML;
+
+  let scrollPos = 0;
+  function animate() {
+    scrollPos += speed;
+    if (scrollPos >= slider.scrollWidth / 2) {
+      scrollPos = 0;
+    }
+    slider.style.transform = `translateX(-${scrollPos}px)`;
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+</script>
 
   
 </body>
