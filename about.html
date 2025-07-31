@@ -328,6 +328,16 @@
 
   scroll();
 </script>
+<script>
+  const slider = document.querySelector('.vune-slider-track');
+  const boxes = Array.from(slider.children);
+  for (let i = 0; i < boxes.length; i++) {
+    const clone = boxes[i].cloneNode(true);
+    slider.appendChild(clone);
+  }
+  console.log("Slider-Boxen wurden verdoppelt.");
+</script>
+</body>
 
   
 </body>
