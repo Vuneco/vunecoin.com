@@ -327,42 +327,52 @@ Erlebe das Blockchain-Event-Ökosystem von morgen – Made in Germany.</h2>
 
 
 <script>
-  const slider = document.querySelector('.vune-slider-track');
-  const speed = 0.5; // Geschwindigkeit nach Bedarf anpassen (z.B. 0.5 für langsamer)
+const slider = document.querySelector('.vune-slider-track');
+const speed = 0.5;
 
-  // Dupliziere den Inhalt einmal, um eine nahtlose Schleife zu erstellen
-  slider.innerHTML += slider.innerHTML;
+slider.innerHTML += slider.innerHTML;
 
-  let scrollPos = 0;
-  let animationFrameId;
+let scrollPos = 0;
+let animationFrameId;
 
-  function animate() {
-    scrollPos += speed;
+function animate() {
+  scrollPos += speed;
+  const originalContentWidth = slider.scrollWidth / 2;
 
-    // Wenn scrollPos die Breite des ursprünglichen Inhalts überschreitet,
-    // setze es zurück, um eine unendliche Schleife zu simulieren.
-    // Wir benötigen die Breite des *ursprünglichen* Satzes von Boxen, nicht die gesamte duplizierte Breite.
-    // Eine robustere Methode ist, die Breite der ersten Hälfte des Tracks zu messen.
-    const originalContentWidth = slider.scrollWidth / 2; // Da du es einmal dupliziert hast
-
-    if (scrollPos >= originalContentWidth) {
-      scrollPos = 0; // Setze auf den Anfang des ersten Duplikats zurück
-    }
-
-    slider.style.transform = `translateX(-${scrollPos}px)`;
-    animationFrameId = requestAnimationFrame(animate);
+  if (scrollPos >= originalContentWidth) {
+    scrollPos = 0;
   }
 
-  animate(); // Starte die Animation
+  slider.style.transform = `translateX(-${scrollPos}px)`;
+  animationFrameId = requestAnimationFrame(animate);
+}
 
-  // Optional: Bei Hover pausieren
-  slider.addEventListener('mouseenter', () => {
-    cancelAnimationFrame(animationFrameId);
-  });
+function stopAnimation() {
+  cancelAnimationFrame(animationFrameId);
+}
 
-  slider.addEventListener('mouseleave', () => {
-    animate();
-  });
+function startAnimation() {
+  animationFrameId = requestAnimationFrame(animate);
+}
+
+// Start initially
+animate();
+
+// Desktop: Stop/Start on hover
+slider.addEventListener('mouseenter', stopAnimation);
+slider.addEventListener('mouseleave', startAnimation);
+
+// Mobile: Tap once to stop, nochmal tippen startet wieder
+let sliderPaused = false;
+slider.addEventListener('touchstart', function () {
+  if (sliderPaused) {
+    startAnimation();
+    sliderPaused = false;
+  } else {
+    stopAnimation();
+    sliderPaused = true;
+  }
+});
 </script>
 
   
