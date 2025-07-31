@@ -109,37 +109,45 @@
        
 .vune-slider-wrapper {
   overflow: hidden;
-  width: 100%;
-  background: #fff;
-  padding: 30px 0;
   position: relative;
+  width: 100%;
 }
 .vune-slider-track {
   display: flex;
   gap: 40px;
-  animation: vuneScrollLoop 40s linear infinite;
+  animation: scrollLoop 60s linear infinite;
 }
 .vune-slider-box {
-  min-width: 280px;
-  max-width: 300px;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  padding: 15px;
   flex-shrink: 0;
+  width: 300px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  padding: 20px;
   text-align: center;
 }
 .vune-slider-box img {
   width: 100%;
-  height: 160px;
+  height: 180px;
   object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 12px;
+  border-radius: 12px;
+  margin-bottom: 15px;
 }
-@keyframes vuneScrollLoop {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); } /* passt sich dynamisch an */
+.vune-slider-box h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #800000;
 }
+.vune-slider-box p {
+  font-size: 14px;
+  color: #444;
+}
+
+@keyframes scrollLoop {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
 
 
     
@@ -178,34 +186,31 @@
     </p>
   </main>
 
-  <div id="vuneSliderWrapper">
-  <div id="vuneSlider">
-    
-    <div class="slider-box">
-      <img src="/assets/blockchain.png" alt="Blockchain" />
-      <h3>VuneCoin Blockchain</h3>
-      <p>Smart Contracts, NFTs und Identitäten auf unserer eigenen PoA-Blockchain.</p>
+  <section class="boxed-section">
+  <h2 style="text-align:center; margin-bottom: 40px;">VuneCoin Highlights</h2>
+  <div class="vune-slider-wrapper">
+    <div class="vune-slider-track" id="vuneTrack">
+      <div class="vune-slider-box">
+        <img src="/assets/blockchain.png" alt="Blockchain">
+        <h3>Eigene Blockchain</h3>
+        <p>VuneCoin basiert auf einer eigenen PoA-Blockchain für schnelle, transparente Transaktionen.</p>
+      </div>
+      <div class="vune-slider-box">
+        <img src="/assets/ticket.png" alt="Tickets">
+        <h3>Tickets & Events</h3>
+        <p>Bezahle Tickets und Events direkt mit VuneCoin – schnell, digital, smart.</p>
+      </div>
+      <div class="vune-slider-box">
+        <img src="/assets/ico.png" alt="ICO">
+        <h3>Jetzt investieren</h3>
+        <p>Der ICO läuft – sichere dir Coins mit echtem Potenzial im Ökosystem.</p>
+      </div>
+      <!-- Weitere Boxen kannst du einfach kopieren -->
     </div>
-
-    <div class="slider-box">
-      <img src="/assets/ico.png" alt="ICO" />
-      <h3>ICO jetzt live</h3>
-      <p>Jetzt VuneCoins sichern auf ico.vunecoin.com und am Wachstum teilhaben.</p>
-    </div>
-
-    <div class="slider-box">
-      <img src="/assets/ticket.png" alt="Tickets" />
-      <h3>Event-Tickets mit VuneCoin</h3>
-      <p>Verwende VuneCoin für Events, Locations und digitale Verifizierungen.</p>
-    </div>
-
-    <!-- weitere Boxen hier -->
-
   </div>
-</div>
+</section>
 
-
-
+  
   <footer>
  <p>© 2021–<script>document.write(new Date().getFullYear())</script> VuneCoin – Alle Rechte vorbehalten</p>
 </footer>
