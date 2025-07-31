@@ -107,6 +107,45 @@
   max-width: 1200px;
 }
 
+    #vuneSliderWrapper {
+  overflow: hidden;
+  width: 100%;
+  padding: 30px 0;
+  background: #fff;
+}
+#vuneSlider {
+  display: flex;
+  gap: 40px;
+  transition: transform 0.2s linear;
+  will-change: transform;
+}
+.slider-box {
+  min-width: 280px;
+  max-width: 300px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  padding: 15px;
+  flex-shrink: 0;
+  text-align: center;
+}
+.slider-box img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+.slider-box h3 {
+  font-size: 18px;
+  color: #800000;
+  margin-bottom: 8px;
+}
+.slider-box p {
+  font-size: 14px;
+  color: #555;
+}
+
     
   </style>
 </head>
@@ -143,29 +182,32 @@
     </p>
   </main>
 
-  <section class="boxed-section">
-  <h2>Was ist VuneCoin?</h2>
-  <div class="auto-slider" id="vuneSliderWrapper">
-    <div class="track" id="vuneSlider">
-      <div class="card">
-        <h3>💰 Initialwert</h3>
-        <p>1 VuneCoin = 16,73 USD – begrenzte Stückzahl, frühes Investment mit Potenzial.</p>
-      </div>
-      <div class="card">
-        <h3>⛓️ Eigene Blockchain</h3>
-        <p>Proof-of-Authority Blockchain für Smart Contracts, NFTs, Tickets und Identitäten.</p>
-      </div>
-      <div class="card">
-        <h3>🔗 Verknüpft mit Leylix</h3>
-        <p>Verwendbar für Events, Tickets, Sponsoring, Verifizierungen – direkt im Alltag.</p>
-      </div>
-      <div class="card">
-        <h3>📈 Investieren</h3>
-        <p>Jetzt VuneCoin kaufen auf <a href="https://ico.vunecoin.com">ico.vunecoin.com</a></p>
-      </div>
+  <div id="vuneSliderWrapper">
+  <div id="vuneSlider">
+    
+    <div class="slider-box">
+      <img src="/assets/blockchain.png" alt="Blockchain" />
+      <h3>VuneCoin Blockchain</h3>
+      <p>Smart Contracts, NFTs und Identitäten auf unserer eigenen PoA-Blockchain.</p>
     </div>
+
+    <div class="slider-box">
+      <img src="/assets/ico.png" alt="ICO" />
+      <h3>ICO jetzt live</h3>
+      <p>Jetzt VuneCoins sichern auf ico.vunecoin.com und am Wachstum teilhaben.</p>
+    </div>
+
+    <div class="slider-box">
+      <img src="/assets/ticket.png" alt="Tickets" />
+      <h3>Event-Tickets mit VuneCoin</h3>
+      <p>Verwende VuneCoin für Events, Locations und digitale Verifizierungen.</p>
+    </div>
+
+    <!-- weitere Boxen hier -->
+
   </div>
-</section>
+</div>
+
 
 
   <footer>
