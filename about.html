@@ -214,6 +214,60 @@
   background-color: #a00000; /* Etwas heller beim Hover */
 }
 
+.logo-section {
+  width: 100%;
+  background: #fff;
+  padding: 60px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-container {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo-item {
+  width: 100px;
+  height: auto;
+  opacity: 0;
+  transform: translateY(20px);
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+/* Animationen */
+.animate-left {
+  animation-name: fadeInLeft;
+}
+
+.animate-up {
+  animation-name: fadeInUp;
+}
+
+.animate-right {
+  animation-name: fadeInRight;
+}
+
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
 
     
   </style>
@@ -221,11 +275,15 @@
 <body>
 
   <header>
-    <div class="logo-row">
-      <img src="assets/LeylixColored5125.png" alt="Leylix Logo" />
-    <img src="assets/vuneco-colored.png" alt="Vuneco Logo" />
-    <img src="assets/VuneCoinLogoTradeMark--PNG.png" alt="VuneCoin Logo" />
-    </div>
+
+<section class="logo-section">
+  <div class="logo-container">
+    <img src="assets/LeylixColored5125.png" alt="Logo 1" class="logo-item animate-left" />
+    <img src="assets/vuneco-colored.png" alt="Logo 2" class="logo-item animate-up" />
+    <img src="assets/VuneCoinLogoTradeMark--PNG.png" alt="Logo 3" class="logo-item animate-right" />
+  </div>
+</section>
+    
     <section class="boxed-section">
     <h1>Über VuneCoin</h1>
     <h2>VuneCoin & Leylix – Innovation trifft Realität<br>
