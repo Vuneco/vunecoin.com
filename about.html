@@ -268,18 +268,22 @@
   from { opacity: 0; transform: translateX(50px); }
   to { opacity: 1; transform: translateX(0); }
 }
-    .section-icon {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  width: 40px; /* Breite kannst du anpassen */
-  height: 40px;
-  z-index: 10;
+   .section-box {
+  position: relative; /* wichtig für die Platzierung des Icons */
+  padding-top: 60px;  /* Platz nach oben für das Icon */
 }
-.section-icon img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px; /* Optional: für runde Ecken */
+
+.section-box-icon {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+  z-index: 5;
+  border-radius: 8px;
+  background-color: white;
+  padding: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
     
