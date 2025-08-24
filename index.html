@@ -548,20 +548,40 @@ header h1 {
   text-align: center;
 }
 
-#cookie-bar button {
-  background: #fff;
-  color: #000;
-  border: none;
-  padding: 0.6rem 1.2rem;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: all 0.3s ease;
+#cookie-bar button{
+  background:#fff;
+  color:#000;
+  border:none;
+  padding:0.6rem 1.2rem;
+  border-radius:6px;
+  cursor:pointer;
+  font-weight:bold;
+  transition: background .2s ease, color .2s ease, transform .15s ease, box-shadow .2s ease;
+  will-change: transform;
 }
 
-#cookie-bar button:hover {
-  background: #f9c900;
-  color: #000;
+/* Hover/Fokus: Akzeptieren = grün + größer */
+#cookie-bar #accept-cookies:hover,
+#cookie-bar #accept-cookies:focus-visible{
+  background:#16a34a;   /* green-600 */
+  color:#fff;
+  transform: scale(1.06);
+  box-shadow: 0 6px 18px rgba(0,0,0,.15);
+}
+
+/* Hover/Fokus: Ablehnen = rot + größer */
+#cookie-bar #decline-cookies:hover,
+#cookie-bar #decline-cookies:focus-visible{
+  background:#dc2626;   /* red-600 */
+  color:#fff;
+  transform: scale(1.06);
+  box-shadow: 0 6px 18px rgba(0,0,0,.15);
+}
+
+/* Optional: Tastaturfokus klarer */
+#cookie-bar button:focus-visible{
+  outline:2px solid #fff;
+  outline-offset:2px;
 }
 
 #cookie-logo {
@@ -1061,7 +1081,7 @@ function closeAbout() {
   <img src="assets/VuneCoinGoldmanWhite.png" alt="VuneCoin Logo" style="height: 60px;">
   <p>Diese Website verwendet Cookies, um dir das beste Nutzererlebnis zu bieten. Du kannst zustimmen oder ablehnen.</p>
   <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
-    <button id="accept-cookies">Okay</button>
+    <button id="accept-cookies">Akzeptieren</button>
     <button id="decline-cookies">Ablehnen</button>
   </div>
 </div>
@@ -1105,6 +1125,7 @@ function closeAbout() {
   
 </body>
 </html>
+
 
 
 
