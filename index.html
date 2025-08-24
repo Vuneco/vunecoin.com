@@ -525,7 +525,8 @@ header h1 {
 #vunePopup.show {
   opacity: 1;
 }
-
+    
+/* Gehören zur Cookie Abfrage bis #cookie-buttons-Am Ende des /body gibt es noch die CookieAbfrageFunktion */
     #cookie-bar {
   position: fixed;
   bottom: 0;
@@ -1087,7 +1088,7 @@ function closeAbout() {
 </div>
  
 <script>
-  // --- Consent Storage Helper ---
+  // --- Consent Storage Helper CookieBar hier oben und dieser Bereich also section sind für die cookie abfrage. Oben die buttons nicht vergessen---
   function shouldAskAgain() {
     const last = localStorage.getItem("cookiesAcceptedAt");
     if (!last) return true;
@@ -1125,6 +1126,7 @@ function closeAbout() {
   
 </body>
 </html>
+
 
 
 
